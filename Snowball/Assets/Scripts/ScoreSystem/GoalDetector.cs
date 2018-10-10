@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class GoalDetector : MonoBehaviour
 {
-    private GoalScoreCounter goalScoreCounter;
+    private GoalScoreObserver goalObserver;
+    private Subject subject;
 
     private void Start()
     {
-        goalScoreCounter = GetComponent<GoalScoreCounter>();
+        goalObserver = GetComponent<GoalScoreObserver>();
+        subject = GameObject.Find("GameManager").GetComponent<Subject>();
+        subject.AddObserver(goalObserver);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "SnowBall")
         {
-            goalScoreCounter.AddScorePoints(collision.gameObject.GetComponent<SnowBallStatusManager>().SnowBallPointValue);
+            subject.Notify("GoalEvent", new GameObject[] { collision.gameObject } );
         }
     }
 }

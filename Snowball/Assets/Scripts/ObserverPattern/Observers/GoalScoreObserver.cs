@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoalScoreCounter : MonoBehaviour
+public class GoalScoreObserver : Observer 
 {
     public Text uiGoalScoreText;
     private int currentScore;
@@ -21,8 +21,15 @@ public class GoalScoreCounter : MonoBehaviour
         }
     }
 
-    public void AddScorePoints(int ballPointValue) {
+    public void AddScorePoints(int ballPointValue)
+    {
         CurrentScore += ballPointValue;
         uiGoalScoreText.text = CurrentScore.ToString();
+    }
+
+    public override void OnNotify(string eventName, GameObject[] associatedGameObjects)
+    {
+        int ballPointValue = associatedGameObjects[0].GetComponent<SnowBallStatusManager>().SnowBallPointValue;
+        AddScorePoints(ballPointValue);
     }
 }
