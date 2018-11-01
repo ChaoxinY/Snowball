@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Subject : MonoBehaviour
 {
-    List<Observer> observers = new List<Observer>();
+    private List<Observer> observers = new List<Observer>();
 
     public void Notify(string eventName, GameObject[] associatedGameObjects)
     {

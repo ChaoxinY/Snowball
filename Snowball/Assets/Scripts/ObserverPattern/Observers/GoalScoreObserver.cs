@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GoalScoreObserver : Observer 
-{
-    public Text uiGoalScoreText;
-    private int currentScore;
+{   
+    [SerializeField]
+    private Text[] uiGoalScoreTexts;
+    private int[] currentScore = new int[2];
 
-    public int CurrentScore
+    public int[] CurrentScore
     {
         get
         {
@@ -21,15 +22,20 @@ public class GoalScoreObserver : Observer
         }
     }
 
-    public void AddScorePoints(int ballPointValue)
+    public void AddScorePoints(int ballPointValue,int goalID)
     {
-        CurrentScore += ballPointValue;
-        uiGoalScoreText.text = CurrentScore.ToString();
+        CurrentScore[goalID] += ballPointValue;
+        uiGoalScoreTexts[goalID].text = CurrentScore[goalID].ToString();
     }
 
     public override void OnNotify(string eventName, GameObject[] associatedGameObjects)
     {
-        int ballPointValue = associatedGameObjects[0].GetComponent<SnowBallStatusManager>().SnowBallPointValue;
-        AddScorePoints(ballPointValue);
+        if (eventName == "GoalEvent")
+        {
+            SnowBallStatusHolder snowBallStatusManager = associatedGameObjects[0].GetComponent<SnowBallStatusHolder>();
+            int ballPointValue = snowBallStatusManager.SnowBallPointValue;
+            int goalID = snowBallStatusManager.LastContactedGoalID;
+            AddScorePoints(ballPointValue, goalID);
+        }
     }
 }

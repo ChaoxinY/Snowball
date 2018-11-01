@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SnowBall
-  - Snowpile
+  - Goal
+  - PowerUp
+  - Field
   layers:
   - Default
   - TransparentFX
