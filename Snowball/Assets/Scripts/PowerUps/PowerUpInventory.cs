@@ -11,7 +11,7 @@ public class PowerUpInventory : MonoBehaviour, IPowerUpHolder
     {
         for (int i = 0; i < collectedPowerUp.Length; i++) {
             if (collectedPowerUp[i] == null) {
-                collectedPowerUp[i] = delegate { powerUpToAdd.Activate(); };
+                collectedPowerUp[i] = delegate { powerUpToAdd.Activate(); };                
                 Destroy(powerUpToAdd.gameObject);
                 return;
             }
@@ -19,8 +19,11 @@ public class PowerUpInventory : MonoBehaviour, IPowerUpHolder
     }  
 
     public void UsePowerUp(int index) {
-        Action powerUpActivate = collectedPowerUp[index];
-        collectedPowerUp[index] = null;
-        powerUpActivate();
+        if (collectedPowerUp[index] != null)
+        {           
+            Action powerUpActivate = collectedPowerUp[index];
+            collectedPowerUp[index] = null;
+            powerUpActivate();
+        }
     }
 }

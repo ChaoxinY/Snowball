@@ -250,8 +250,9 @@ GameObject:
   - component: {fileID: 375965886}
   - component: {fileID: 375965885}
   - component: {fileID: 375965884}
-  - component: {fileID: 375965888}
   - component: {fileID: 375965889}
+  - component: {fileID: 375965888}
+  - component: {fileID: 375965890}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -352,6 +353,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &375965890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375965883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a51b3e646b611042a676b6958cb2570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &547907498
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +732,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1089093834
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410277461432862, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659177418466962, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_Name
+      value: Fireball
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659177418466962, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+      propertyPath: m_TagString
+      value: PowerUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114183618402260722, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: b2472dbc3d7040d43956564f1c51f3a0, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1235260123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1224,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1700155958}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352517c03a54ec24684ba3db010f7882, type: 3}
   m_Name: 
@@ -1258,3 +1321,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871301293}
   m_CullTransparentMesh: 0
+--- !u!1 &2086518281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1659177418466962, guid: b2472dbc3d7040d43956564f1c51f3a0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1089093834}
+--- !u!114 &2086518282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086518281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2e05a790f04f543aef70bb497fe64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SnowBallStatusHolder: {fileID: 194141850}
