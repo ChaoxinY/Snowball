@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857e83a5ee7483c479073469729024ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PowerUpInventory: {fileID: 375965890}
 --- !u!54 &375965889
 Rigidbody:
   m_ObjectHideFlags: 0

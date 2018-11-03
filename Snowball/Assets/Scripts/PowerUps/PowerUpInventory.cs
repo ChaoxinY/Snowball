@@ -17,10 +17,12 @@ public class PowerUpInventory : MonoBehaviour, IPowerUpHolder
             }
         }      
     }  
-
+    
     public void UsePowerUp(int index) {
         if (collectedPowerUp[index] != null)
-        {           
+        {   
+            //Action reference is set to the class in the codebase and is not 
+            //a reference to the methode of the component class in the scene.
             Action powerUpActivate = collectedPowerUp[index];
             collectedPowerUp[index] = null;
             powerUpActivate();
