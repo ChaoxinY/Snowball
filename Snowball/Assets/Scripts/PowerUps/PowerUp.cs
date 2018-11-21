@@ -13,5 +13,6 @@ public abstract class PowerUp : MonoBehaviour
     //Single Responsibility: Removed picked up methode because it has nothing to with the powerup class
     //public abstract void PickedUp();
     public abstract void Activate();
+    public void SelfDestruct() { Destroy(gameObject); }
 }
 

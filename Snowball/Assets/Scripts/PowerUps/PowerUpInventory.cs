@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PowerUpInventory : MonoBehaviour, IPowerUpHolder
+public class PowerUpInventory : IPowerUpHolder
 {
     private Action[] collectedPowerUp = new Action[2];
 
@@ -11,13 +11,15 @@ public class PowerUpInventory : MonoBehaviour, IPowerUpHolder
     {
         for (int i = 0; i < collectedPowerUp.Length; i++) {
             if (collectedPowerUp[i] == null) {
-                collectedPowerUp[i] = delegate { powerUpToAdd.Activate(); };                
-                Destroy(powerUpToAdd.gameObject);
+                collectedPowerUp[i] = delegate { powerUpToAdd.Activate(); };
+                powerUpToAdd.SelfDestruct();
                 return;
             }
         }      
     }  
     
+    //Use toggle system
+    //Input button to toggle between different powerup
     public void UsePowerUp(int index) {
         if (collectedPowerUp[index] != null)
         {   

@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using System.Collections;
 
 //Coupling : None, there is no coupling between this class and other classes in the codebase.
-
-public class PowerUpSpawner : MonoBehaviour, ISpawner
+public class RandomGridSpawner : ISpawner
 {   
-    [SerializeField]
     private GameObject[] gameObjectSpawnPool;
-    [SerializeField]
     private Transform spawnPlatform;
-    [SerializeField]
     private float spawnInterval;
+    public bool isSpawning;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnLoop());
-        spawnPlatform = GameObject.FindGameObjectWithTag("Field").transform;
+    public RandomGridSpawner(GameObject[] gameObjectSpawnPool,Transform spawnPlatform, float spawnInterval,bool isSpawning = true) {
+        this.gameObjectSpawnPool = gameObjectSpawnPool;
+        this.spawnPlatform = spawnPlatform;
+        this.spawnInterval = spawnInterval;
+        this.isSpawning = isSpawning;
     }
 
     public IEnumerator SpawnLoop()
     {
-        while (this.enabled)
+        while (isSpawning)
         {
             yield return new WaitForSeconds(spawnInterval);
             GameObject objectToSpawn = gameObjectSpawnPool[Random.Range(0, gameObjectSpawnPool.Length)];
@@ -33,7 +31,7 @@ public class PowerUpSpawner : MonoBehaviour, ISpawner
 
     public void SpawnGameObject(GameObject prefabToSpawn, Vector3 location)
     {   
-        Instantiate(prefabToSpawn, location,Quaternion.identity);
+        GameObject.Instantiate(prefabToSpawn, location,Quaternion.identity);
     }
 
     private Vector3 DetermineSpawnPosition(Transform referenceTransform) {
@@ -42,7 +40,7 @@ public class PowerUpSpawner : MonoBehaviour, ISpawner
         float minHorizontalLength = referenceTransform.position.x - referenceTransform.localScale.x / 2;
         float maxDepthLength = referenceTransform.position.z + referenceTransform.localScale.z / 2;
         float minDepthLength = referenceTransform.position.z - referenceTransform.localScale.z / 2;
-        float spawnHeight = referenceTransform.position.y + referenceTransform.localScale.y / 2 + 0.1f;
+        float spawnHeight = referenceTransform.position.y + referenceTransform.localScale.y / 2 + 0.15f;
         Debug.Log(maxDepthLength + " " + minDepthLength);
 
         Vector3 spawnPositon = new Vector3(Random.Range(minHorizontalLength,maxHorizontalLength),spawnHeight,

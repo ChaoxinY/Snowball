@@ -69,6 +69,8 @@ public class SnowBallStatusHolder : MonoBehaviour
             if (snowBallSizeMultiplier > 3) {
                 snowBallSizeMultiplier = 3;
             }
+            //Make a resizer component from this
+            //Changing local scale has nothing to do with storing or accessing data
             gameObject.transform.localScale = Vector3.one * snowBallSizeMultiplier;
         }
     }
