@@ -1,17 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputhandlerUpdater
+public class InputHandlerUpdater
 {
-    public InputHandlerState currentInputHandler;
+    private InputHandlerState currentInputHandler;
+    private GameObject gameObjectAttachedTo;
 
-    public InputhandlerUpdater(InputHandlerState startingInputHandler)
+    public InputHandlerState CurrentInputHandler { get { return currentInputHandler; } set { currentInputHandler = value; } }
+
+    //Creates its own state based on client requirement
+    public InputHandlerUpdater(GameObject gameAttachedTo)
     {
-        currentInputHandler = startingInputHandler;
+        this.gameObjectAttachedTo = gameAttachedTo;
     }
 
     public void UpdateCurrentInputHandler()
     {
-        currentInputHandler.HandleInput();
+        CurrentInputHandler.HandleInput();
+    }
+
+    public void FixedUpdateCurrentInputHandler()
+    {
+        if (CurrentInputHandler.UnExecutedCommands.Count != 0)
+        {
+            foreach (ICommand command in CurrentInputHandler.UnExecutedCommands)
+                command.Execute(gameObjectAttachedTo);
+        }
+        currentInputHandler.ClearUnExecutedCommandsList();
     }
 }
+
+//public void SetDefaultInputHandlerState(InputStateFactory inputStateFactory, string defaultState, System.Object referenceObject)
+//{
+//    currentInputHandler = (InputHandlerState)inputStateFactory.CreateProduct(
+//    defaultState, referenceObject, gameObjectAttachedTo);
+//    Debug.Log(currentInputHandler);
+//}
+

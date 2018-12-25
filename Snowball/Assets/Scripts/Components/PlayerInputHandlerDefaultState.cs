@@ -5,26 +5,35 @@ using System.Collections;
 //state
 public class PlayerInputHandlerDefaultState : InputHandlerState
 {
-    private ICommand moveCommand;
+    private ICommand moveCommand, rotateCommand;
+    private System.Object objectAttachedTo;
     private GameObject gameobjectAttachedTo;
-    private InputhandlerUpdater inputHandlerUpdaterAttachedTo; 
+    private InputHandlerUpdater inputHandlerUpdaterAttachedTo;
 
-    public PlayerInputHandlerDefaultState(GameObject gameobjectAttachedTo, InputhandlerUpdater inputHandlerUpdaterAttachedTo) {       
+    public PlayerInputHandlerDefaultState(System.Object objectAttachedTo, GameObject gameobjectAttachedTo, InputHandlerUpdater inputHandlerUpdaterAttachedTo)
+    {
+        this.objectAttachedTo = objectAttachedTo;
         this.gameobjectAttachedTo = gameobjectAttachedTo;
         this.inputHandlerUpdaterAttachedTo = inputHandlerUpdaterAttachedTo;
-        moveCommand = new AddForceToRigidbodyCommand(this);
+        inputStateFactory = new InputStateFactory();
+        moveCommand = new SetRigidbodyVelocityCommand(this);
+        rotateCommand = new RotateRigidbodyCommand(this);
     }
 
     public override void HandleInput()
     {
-        lastMovementInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        lastMovementInput = new Vector3(Input.GetAxis("J1 JoystickLeftHorizontal"), 0, Input.GetAxis("J1 JoystickLeftVertical"));
         if (lastMovementInput != Vector3.zero)
         {
-            moveCommand.Execute(gameobjectAttachedTo);
+            fixedUpdateCommands.Add(moveCommand);
+            fixedUpdateCommands.Add(rotateCommand);
             //When changing to other inputhandler states
             //Syntax is fine needs to confirm actual functionality
             //with an another concrete inputhandler state
-            //inputHandlerUpdaterAttachedTo.currentInputHandler = new PlayerInputHandlerDefaultState(gameobjectAttachedTo, inputHandlerUpdaterAttachedTo);
+        //    Debug.Log("Running");
+        //    inputHandlerUpdaterAttachedTo.CurrentInputHandler = (InputHandlerState)inputStateFactory.CreateProduct(
+        //FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState.ToString(), objectAttachedTo, gameobjectAttachedTo);
+
         }
     }
 }

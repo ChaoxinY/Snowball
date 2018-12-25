@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    private InputhandlerUpdater inputhandlerUpdater;
-    private PlayerCollisionHandler playerCollisionHandler;
+    private IFactory inputStateFactory;
+    private ICollideAble playerCollisionHandler;
+    private InputHandlerUpdater inputhandlerUpdater;
     private PowerUpInventory powerUpInventory;
 
-    public InputhandlerUpdater InputhandlerUpdater { get { return inputhandlerUpdater; } }
-    public PlayerCollisionHandler PlayerCollisionHandler { get { return playerCollisionHandler; } }
+    public IFactory InputStateFactory { get { return inputStateFactory; } }
+    public ICollideAble PlayerCollisionHandler { get { return playerCollisionHandler; } }
+    public InputHandlerUpdater InputHandlerUpdater { get { return inputhandlerUpdater; } }
     public PowerUpInventory PowerUpInventory { get { return powerUpInventory; } }
 
     private void Start()
     {
-        inputhandlerUpdater = new InputhandlerUpdater(new PlayerInputHandlerDefaultState(gameObject, InputhandlerUpdater));
+        inputStateFactory = new InputStateFactory();
+        inputhandlerUpdater = new InputHandlerUpdater(gameObject);
+        inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct
+            (FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState.ToString(), this, gameObject);
         powerUpInventory = new PowerUpInventory();
-        playerCollisionHandler = new PlayerCollisionHandler(gameObject,powerUpInventory);      
+        playerCollisionHandler = new PlayerCollisionHandler(gameObject, powerUpInventory);
     }
 
     private void Update()
     {
-        InputhandlerUpdater.UpdateCurrentInputHandler();
+        InputHandlerUpdater.UpdateCurrentInputHandler();
+    }
+
+    private void FixedUpdate()
+    {
+        InputHandlerUpdater.FixedUpdateCurrentInputHandler();
     }
 
     private void OnCollisionEnter(Collision collision)

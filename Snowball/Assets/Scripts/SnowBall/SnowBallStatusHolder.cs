@@ -26,7 +26,6 @@ public class SnowBallStatusHolder : MonoBehaviour
         set
         {   
             snowBallPointValue = value;
-            Debug.Log(snowBallPointValue);
         }
     }
 
