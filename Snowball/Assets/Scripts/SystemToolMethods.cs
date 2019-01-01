@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 public static class SystemToolMethods
 {
-    public static Object ReturnObjectComponent(Object referenceObject, PropertyInfo propertyInfo, string name)
+    public static System.Object ReturnObjectComponent(System.Object referenceObject, PropertyInfo propertyInfo, string name)
     {
-        Object referenceObjectComponent = propertyInfo.GetValue(referenceObject, null);
+        System.Object referenceObjectComponent = propertyInfo.GetValue(referenceObject, null);
         return referenceObjectComponent;
     }
 
-    public static PropertyInfo ReturnPropertyInfo(Object referenceObject, string name)
+    public static PropertyInfo ReturnPropertyInfo(System.Object referenceObject, string name)
     {
         Type classType = referenceObject.GetType();
         PropertyInfo propertyInfo = classType.GetProperty(name);
         return propertyInfo;
     }
 
-    public static bool CheckIfPropertyExsists(Object referenceObject, string name)
+    public static bool CheckIfPropertyExsists(System.Object referenceObject, string name)
     {
         bool propertyExsists = false;
         Type classType = referenceObject.GetType();
@@ -26,5 +28,24 @@ public static class SystemToolMethods
             propertyExsists = true;
         }
         return propertyExsists;
+    }
+
+    public static List<System.Object> ReturnObjectPointers(System.Object referenceObject, List<string> productRequirements)
+    {
+        List<System.Object> pointers = new List<object>();
+        foreach (string requirementName in productRequirements)
+        {
+            if (CheckIfPropertyExsists(referenceObject, requirementName))
+            {
+                PropertyInfo propertyInfo = ReturnPropertyInfo(referenceObject, requirementName);
+                pointers.Add(ReturnObjectComponent(referenceObject, propertyInfo, requirementName));
+            }
+            else
+            {
+                pointers = null;
+                break;
+            }
+        }
+        return pointers;
     }
 }
