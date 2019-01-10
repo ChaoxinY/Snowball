@@ -8,20 +8,19 @@ public class InputStateFactory : ComponentFactory, IFactory
 {
     public InputStateFactory()
     {
-        productRequirements = new List<string> { "InputHandlerUpdater" };
+        //String search is slow(when the class has many properties) and goes wrong easily(all properties in the object class have to have
+        //the same name)
+        requirementPointerNames = new List<string> { "InputHandlerUpdater" };
     }
 
-    //Foreach automation
-    //What happens if multiple components are needed, more if statements ?
-    //You are ready know that you are making an inputhandler so you know the dependencies of all the products.
-    //Set the methdoe to static?
-   
     public System.Object CreateProduct(string productType, System.Object referenceObject, GameObject referenceObjectGameObject)
     {
         System.Object product = null;
 
-        List<System.Object> requirements = SystemToolMethods.ReturnObjectPointers(referenceObject, productRequirements);
-        InputHandlerUpdater inputHandlerUpdater = (InputHandlerUpdater)requirements[0];
+        //Is going to be repeated in other classes.
+        //1.Put this in constructor?(Forced to use a larger scope, might create overhead)
+        List<System.Object> requirementPointer = SystemToolMethods.ReturnObjectPointers(referenceObject, requirementPointerNames);
+        InputHandlerUpdater inputHandlerUpdater = (InputHandlerUpdater)requirementPointer[0];
 
         switch (productType)
         {

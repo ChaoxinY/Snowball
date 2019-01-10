@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputHandlerUpdater
+public class InputHandlerUpdater : IUpdater, IFixedUpdater
 {
     private InputHandlerState currentInputHandler;
     private GameObject gameObjectAttachedTo;
@@ -14,16 +14,16 @@ public class InputHandlerUpdater
         this.gameObjectAttachedTo = gameAttachedTo;
     }
 
-    public void UpdateCurrentInputHandler()
+    public void UpdateComponent()
     {
         CurrentInputHandler.HandleInput();
     }
 
-    public void FixedUpdateCurrentInputHandler()
+    public void FixedUpdateComponent()
     {
-        if (CurrentInputHandler.UnExecutedCommands.Count != 0)
+        if (CurrentInputHandler.FixedUpdateCommands.Count != 0)
         {
-            foreach (ICommand command in CurrentInputHandler.UnExecutedCommands)
+            foreach (ICommand command in CurrentInputHandler.FixedUpdateCommands)
                 command.Execute(gameObjectAttachedTo);
         }
         currentInputHandler.ClearUnExecutedCommandsList();

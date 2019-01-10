@@ -30,10 +30,10 @@ public static class SystemToolMethods
         return propertyExsists;
     }
 
-    public static List<System.Object> ReturnObjectPointers(System.Object referenceObject, List<string> productRequirements)
+    public static List<System.Object> ReturnObjectPointers(System.Object referenceObject, List<string> requirementPointerNames)
     {
         List<System.Object> pointers = new List<object>();
-        foreach (string requirementName in productRequirements)
+        foreach (string requirementName in requirementPointerNames)
         {
             if (CheckIfPropertyExsists(referenceObject, requirementName))
             {

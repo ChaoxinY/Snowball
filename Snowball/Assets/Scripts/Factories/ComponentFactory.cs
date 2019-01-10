@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class ComponentFactory
+public abstract class ComponentFactory
 {
-    protected List<string> productRequirements;
+    protected List<string> requirementPointerNames;
 }
