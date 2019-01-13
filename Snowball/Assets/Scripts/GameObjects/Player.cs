@@ -2,7 +2,7 @@
 using UnityEngine;
 
 //Highest layer
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IInputSchemeHolder
 {
     private IFactory inputStateFactory;
     private ICollideAble playerCollisionHandler;
@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private List<IUpdater> updaters = new List<IUpdater>();
     private List<IFixedUpdater> fixedUpdaters = new List<IFixedUpdater>();
     private List<ICollideAble> collideAbles = new List<ICollideAble>();
+    private InputScheme inputScheme;
 
     public IFactory InputStateFactory { get { return inputStateFactory; } }
     public ICollideAble PlayerCollisionHandler { get { return playerCollisionHandler; } }
@@ -21,8 +22,7 @@ public class Player : MonoBehaviour
     {
         inputStateFactory = new InputStateFactory();
         inputhandlerUpdater = new InputHandlerUpdater(gameObject);
-        inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct
-            (FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState.ToString(), this, gameObject);
+        inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(0, this, gameObject);
         powerUpInventory = new PowerUpInventory();
         playerCollisionHandler = new PlayerCollisionHandler(gameObject, powerUpInventory);
 
@@ -33,10 +33,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        foreach (IUpdater updater in updaters)
-        {
-            updater.UpdateComponent();
-        }
+        SystemToolMethods.UpdateIUpdaters(updaters);
     }
 
     private void FixedUpdate()
@@ -53,5 +50,15 @@ public class Player : MonoBehaviour
         {
             collideAble.ReactToCollision(collision);
         }
+    }
+
+    public InputScheme GetInputScheme()
+    {
+        return inputScheme;
+    }
+
+    public void SetInputScheme(InputScheme inputScheme)
+    {
+        this.inputScheme = inputScheme;
     }
 }

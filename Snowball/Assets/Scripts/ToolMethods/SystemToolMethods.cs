@@ -48,4 +48,12 @@ public static class SystemToolMethods
         }
         return pointers;
     }
+
+    public static void UpdateIUpdaters(List<IUpdater> updaters)
+    {
+        foreach (IUpdater updater in updaters)
+        {
+            updater.UpdateComponent();
+        }
+    }
 }

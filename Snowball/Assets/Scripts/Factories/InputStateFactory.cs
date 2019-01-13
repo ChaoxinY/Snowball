@@ -13,7 +13,7 @@ public class InputStateFactory : ComponentFactory, IFactory
         requirementPointerNames = new List<string> { "InputHandlerUpdater" };
     }
 
-    public System.Object CreateProduct(string productType, System.Object referenceObject, GameObject referenceObjectGameObject)
+    public System.Object CreateProduct(int productType, System.Object referenceObject, GameObject referenceObjectGameObject)
     {
         System.Object product = null;
 
@@ -24,7 +24,7 @@ public class InputStateFactory : ComponentFactory, IFactory
 
         switch (productType)
         {
-            case "PlayerInputHandlerDefaultState":
+            case 0:
                 product = new PlayerInputHandlerDefaultState(referenceObject, referenceObjectGameObject, inputHandlerUpdater);
                 break;
         }

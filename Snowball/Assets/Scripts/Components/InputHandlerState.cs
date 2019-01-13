@@ -12,6 +12,7 @@ public abstract class InputHandlerState
     public List<ICommand> FixedUpdateCommands { get { return fixedUpdateCommands; } }
     public abstract void HandleInput();
     public void ClearUnExecutedCommandsList() { FixedUpdateCommands.Clear(); }
-  
-}
+    protected abstract void HandleControllerInput(string inputString);
+    protected abstract void HandleKeyBoardMouseInput(string inputString);
+ }
 

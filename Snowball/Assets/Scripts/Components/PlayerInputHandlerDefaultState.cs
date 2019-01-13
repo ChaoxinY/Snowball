@@ -9,7 +9,7 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
     private System.Object objectAttachedTo;
     private GameObject gameobjectAttachedTo;
     private InputHandlerUpdater inputHandlerUpdaterAttachedTo;
-    private InputScheme stringBlock;
+    private InputScheme inputScheme;
 
     public PlayerInputHandlerDefaultState(System.Object objectAttachedTo, GameObject gameobjectAttachedTo, InputHandlerUpdater inputHandlerUpdaterAttachedTo)
     {
@@ -19,23 +19,23 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
         inputStateFactory = new InputStateFactory();
         moveCommand = new SetRigidbodyVelocityCommand(this);
         rotateCommand = new RotateRigidbodyCommand(this);
-        stringBlock = gameobjectAttachedTo.GetComponent<InputScheme>();
-        stringBlock.ControllerOrder = 1.ToString();
+        inputScheme = gameobjectAttachedTo.GetComponent<IInputSchemeHolder>().GetInputScheme();
+        //stringBlock.ControllerOrder = 1.ToString();
     }
 
     public override void HandleInput()
     {
-        UpdateLastMovementInput();
         string userInput = EditorToolMethod.ReturnInputString();
-        foreach (InputButton button in stringBlock.controllerButtons) {
-            if (button.buttonName == userInput) {
-                switch (button.buttonStringValue) {
-                    case InputButton.ButtonStringValues.ButtonA:                    
-                        break;
-                }
-            }
+        if (userInput != null && inputScheme.ControllerType == ControllerInformation.ControllerType.Keyboard)
+        {
+            HandleKeyBoardMouseInput(userInput);
+        }
+        else if (userInput != null && inputScheme.ControllerType == ControllerInformation.ControllerType.Controller)
+        {
+            HandleControllerInput(userInput);
         }
     }
+
     //When changing to other inputhandler states
     //Syntax is fine needs to confirm actual functionality
     //with an another concrete inputhandler state
@@ -43,11 +43,33 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
     //    inputHandlerUpdaterAttachedTo.CurrentInputHandler = (InputHandlerState)inputStateFactory.CreateProduct(
     //FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState.ToString(), objectAttachedTo, gameobjectAttachedTo);
 
-    private void UpdateLastMovementInput()
+    //how is this going to handle multiple button presses
+    protected override void HandleControllerInput(string inputString)
     {
-        lastMovementInput = new Vector3(Input.GetAxis(stringBlock.ControllerOrder + InputButton.ButtonStringValues.JoystickLeftHorizontal.ToString()), 0, Input.GetAxis(stringBlock.ControllerOrder
-            + InputButton.ButtonStringValues.JoystickLeftVertical.ToString()));
+        UpdateLastMovementInput(inputScheme.ControllerOrder +"JoystickLeftHorizontal",inputScheme.ControllerOrder+"JoystickLeftVertical");
+        foreach (InputButton button in inputScheme.controllerButtons)
+        {
+            if (button.buttonName == inputString)
+            {
+                switch (button.buttonStringValue)
+                {
+                    case InputButton.ButtonStringValues.ButtonA:
+                        break;
+                }
+            }        
+        }
+    }
+    protected override void HandleKeyBoardMouseInput(string inputString) {
+        UpdateLastMovementInput("Horizontal","Vertical");
+        switch (inputString)
+        {
+        }
+    }
+
+    private void UpdateLastMovementInput(string horizontalAxisString,string verticalAxisString)
+    {
+        lastMovementInput = new Vector3(Input.GetAxis(horizontalAxisString), 0, Input.GetAxis(verticalAxisString));
         fixedUpdateCommands.Add(moveCommand);
         fixedUpdateCommands.Add(rotateCommand);
-    } 
+    }
 }

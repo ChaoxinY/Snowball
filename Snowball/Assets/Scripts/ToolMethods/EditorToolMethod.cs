@@ -15,7 +15,8 @@ public static class EditorToolMethod
         {
             SerializedProperty axis = axisArray.GetArrayElementAtIndex(i);
             string name = axis.FindPropertyRelative("m_Name").stringValue;
-            if (Input.GetButtonDown(name))
+            //Might not work if controller axis are considered as buttons 
+            if (Input.GetAxis(name)!=0)
             {
                 buttonString = name;
                 Debug.Log(name);

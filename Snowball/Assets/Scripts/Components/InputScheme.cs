@@ -9,10 +9,9 @@ public class InputButton
     public string buttonName;
     //What string is this button actually going to broadcast
     public ButtonStringValues buttonStringValue;
+
     public enum ButtonStringValues
     {
-        JoystickLeftHorizontal,
-        JoystickLeftVertical,
         ButtonA,
         ButtonB,
     }
@@ -33,7 +32,7 @@ public class ControllerInformation
 [CreateAssetMenu(fileName = "NewInputBlock", menuName = "InputBlock")]
 public class InputScheme : ScriptableObject
 {
-    private string controllerOrder;
+    private ControllerInformation controllerInformation;
 
     [System.NonSerialized]
     public List<InputButton> controllerButtons = new List<InputButton>() { };
@@ -44,18 +43,24 @@ public class InputScheme : ScriptableObject
     {
         get
         {
-            return controllerOrder;
+            return controllerInformation.controllerOrder;
         }
 
         set
         {
-            controllerOrder = "J" + value + " ";
+            controllerInformation.controllerOrder =  value;
             foreach (InputButton button in controllerButtons)
             {
-                button.buttonName = controllerOrder + button.buttonStringValue.ToString();
+                button.buttonName = controllerInformation.controllerOrder + button.buttonStringValue.ToString();
             }
         }
     }
+
+    public ControllerInformation.ControllerType ControllerType {
+
+        get { return controllerInformation.controller; }
+    }
+
 
     private void OnEnable()
     {
@@ -95,7 +100,7 @@ public class InputSchemeAssigner : IUpdater
     private ControllerInformation CheckIfControllerIsConnected(string inputString)
     {
         ControllerInformation controllerInformation = null;
-        string controllerOrder = inputString.Substring(0, 2);
+        string controllerOrder = inputString.Substring(0, 3);
         //check controllers thats already been added to see if this is a duplicate.
         foreach (ControllerInformation c in connectedControllers)
         {
@@ -162,7 +167,7 @@ public class InputSchemeRevoker : IUpdater
     private ControllerInformation CheckIfThisControllerInformationExsist(string inputString)
     {
         ControllerInformation controllerInformation = null;
-        string controllerOrder = inputString.Substring(0, 2);
+        string controllerOrder = inputString.Substring(0, 3);
         foreach (ControllerInformation c in connectedControllers)
         {
             if (c.controllerOrder == controllerOrder)
