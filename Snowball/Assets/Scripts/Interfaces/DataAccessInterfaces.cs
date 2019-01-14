@@ -10,3 +10,13 @@ public interface IInputSchemeHolder
     InputScheme GetInputScheme();
     void SetInputScheme(InputScheme inputScheme);
 }
+
+public interface ISnowBallStatusHolder {
+    SnowBallStatusHolder GetSnowBallStatusHolder();
+    void SetSnowBallStatusHolder(SnowBallStatusHolder snowBallStatusHolder);
+}
+
+public interface IMovementDataHolder {
+    MovementDataHolder GetMovementDataHolder();
+    void SetMovementDataHolder(MovementDataHolder movementDataHolder);
+}

@@ -17,6 +17,7 @@ public class PlayerCollisionHandler : ICollideAble
         switch (collision.gameObject.tag)
         {
             case "Snowball":
+                collision.gameObject.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder().SnowballOwner = gameobjectAttachedTo;
                 break;
             case "Snowpile":
                 collision.gameObject.GetComponent<Snowpile>().PileUpSnowBall();

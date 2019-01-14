@@ -2,7 +2,7 @@
 using UnityEngine;
 
 //Highest layer
-public class Player : MonoBehaviour, IInputSchemeHolder
+public class Player : MonoBehaviour, IInputSchemeHolder,IMovementDataHolder
 {
     private IFactory inputStateFactory;
     private ICollideAble playerCollisionHandler;
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour, IInputSchemeHolder
     private List<IFixedUpdater> fixedUpdaters = new List<IFixedUpdater>();
     private List<ICollideAble> collideAbles = new List<ICollideAble>();
     private InputScheme inputScheme;
+    private MovementDataHolder movementDataHolder;
 
     public IFactory InputStateFactory { get { return inputStateFactory; } }
     public ICollideAble PlayerCollisionHandler { get { return playerCollisionHandler; } }
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour, IInputSchemeHolder
         inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(0, this, gameObject);
         powerUpInventory = new PowerUpInventory();
         playerCollisionHandler = new PlayerCollisionHandler(gameObject, powerUpInventory);
+        movementDataHolder = Resources.Load("Prefabs/DefaultMovementDataHolder") as MovementDataHolder;
 
         updaters.Add(inputhandlerUpdater);
         fixedUpdaters.Add(inputhandlerUpdater);
@@ -60,5 +62,15 @@ public class Player : MonoBehaviour, IInputSchemeHolder
     public void SetInputScheme(InputScheme inputScheme)
     {
         this.inputScheme = inputScheme;
+    }
+
+    public MovementDataHolder GetMovementDataHolder()
+    {
+        return movementDataHolder;
+    }
+
+    public void SetMovementDataHolder(MovementDataHolder movementDataHolder)
+    {
+        this.movementDataHolder = movementDataHolder;
     }
 }

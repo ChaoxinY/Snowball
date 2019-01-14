@@ -32,7 +32,7 @@ public class GoalScoreObserver : Observer
     {
         if (eventName == "GoalEvent")
         {
-            SnowBallStatusHolder snowBallStatusManager = associatedGameObjects[0].GetComponent<SnowBallStatusHolder>();
+            SnowBallStatusHolder snowBallStatusManager = associatedGameObjects[0].GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder();
             int ballPointValue = snowBallStatusManager.SnowBallPointValue;
             int goalID = snowBallStatusManager.LastContactedGoalID;
             AddScorePoints(ballPointValue, goalID);

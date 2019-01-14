@@ -14,6 +14,6 @@ public class RotateRigidbodyCommand : ICommand
         Vector3 movementDirection = stateAttachedTo.LastMovementInput;
         Quaternion newRotaion = Quaternion.LookRotation(movementDirection);
         Transform actorTransform = actor.GetComponent<Transform>();
-        actorTransform.rotation = Quaternion.Slerp(actorTransform.rotation, newRotaion, Time.deltaTime * actor.GetComponent<MovementDataHolder>().RotationSpeed);
+        actorTransform.rotation = Quaternion.Slerp(actorTransform.rotation, newRotaion, Time.deltaTime * actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder().RotationSpeed);
     }
 }

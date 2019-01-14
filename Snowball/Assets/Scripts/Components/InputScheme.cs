@@ -29,7 +29,7 @@ public class ControllerInformation
 }
 
 //Switching between multiple tabs can be nauseating hence putting correlated classes together.
-[CreateAssetMenu(fileName = "NewInputBlock", menuName = "InputBlock")]
+[CreateAssetMenu(fileName = "NewInputBlock", menuName = "Dataholders/InputBlock")]
 public class InputScheme : ScriptableObject
 {
     private ControllerInformation controllerInformation;

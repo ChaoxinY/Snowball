@@ -24,7 +24,7 @@ public class SnowBallCollisionHandler : ICollideAble
             case "Goal":
                 Debug.Log(gameObjectAttachedTo.GetComponent<SnowBallStatusHolder>());
                 Debug.Log(collision.gameObject.GetComponent<GoalStatusHolder>());
-                gameObjectAttachedTo.GetComponent<SnowBallStatusHolder>().LastContactedGoalID = collision.gameObject.GetComponent<GoalStatusHolder>().GoalID;
+                gameObjectAttachedTo.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder().LastContactedGoalID = collision.gameObject.GetComponent<GoalStatusHolder>().GoalID;
                 subject.Notify("GoalEvent", new GameObject[] { gameObjectAttachedTo });
                 break;
         }

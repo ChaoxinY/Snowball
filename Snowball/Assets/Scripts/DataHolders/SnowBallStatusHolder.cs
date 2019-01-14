@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnowBallStatusHolder : MonoBehaviour
+[CreateAssetMenu(fileName = "NewSnowBallStatusHolder", menuName = "Dataholders/SnowBallStatusHolder")]
+public class SnowBallStatusHolder : ScriptableObject
 {
     private int lastContactedGoalID; 
+    [SerializeField]
     private int snowBallPointValue;
+    [SerializeField]
     private float snowBallSizeMultiplier;
-    private GameObject snowballOwner;
+    private GameObject snowball,snowballOwner;
      
-    private void Start()
-    {
-        SnowBallPointValue = 50;
-        snowBallSizeMultiplier = 1;
-        SnowballOwner = GameObject.Find("Player1");
-    }
-
     public int SnowBallPointValue
     {
         get
@@ -42,16 +38,16 @@ public class SnowBallStatusHolder : MonoBehaviour
         }
     }
 
-    public GameObject SnowballOwner
+    public GameObject Snowball
     {
         get
         {
-            return snowballOwner;
+            return snowball;
         }
 
         set
         {
-            snowballOwner = value;
+            snowball = value;
         }
     }
 
@@ -70,7 +66,20 @@ public class SnowBallStatusHolder : MonoBehaviour
             }
             //Make a resizer component from this
             //Changing local scale has nothing to do with storing or accessing data
-            gameObject.transform.localScale = Vector3.one * snowBallSizeMultiplier;
+            snowball.transform.localScale = Vector3.one * snowBallSizeMultiplier;
+        }
+    }
+
+    public GameObject SnowballOwner
+    {
+        get
+        {
+            return snowballOwner;
+        }
+
+        set
+        {
+            snowballOwner = value;
         }
     }
 }
