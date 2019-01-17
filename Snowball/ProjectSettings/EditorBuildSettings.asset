@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/StartScreen.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Chao's Workshop.unity
+    guid: b2f4bdfa3c852ff4eab9b2d557164717
+  - enabled: 1
+    path: Assets/Scenes/Fatih's Workshop.unity
+    guid: dfa0ea1b2c27e4a4f80c81eb2ee4cb45
   m_configObjects: {}
