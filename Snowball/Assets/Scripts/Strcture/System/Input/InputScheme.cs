@@ -23,6 +23,7 @@ public class ControllerInformation
     public ControllerType controller;
     public enum ControllerType
     {
+        None,
         Controller,
         Keyboard
     }
@@ -79,20 +80,29 @@ public class InputSchemeAssigner : IUpdater
     public void UpdateComponent()
     {
         string inputString = EditorToolMethod.ReturnInputString();
-        bool KeyBoardConnected = Input.GetKey(KeyCode.KeypadEnter);
-        bool ControllerConnected = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
+        bool KeyBoardInput = Input.GetKey(KeyCode.KeypadEnter);
+        bool ControllerInput = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
         ControllerInformation newControllerInformation = null;
-        if (KeyBoardConnected)
+        if (KeyBoardInput)
         {
             newControllerInformation = CheckIfKeyboardIsConnected();
         }
-        else if (ControllerConnected)
+        else if (ControllerInput)
         {
             newControllerInformation = CheckIfControllerIsConnected(inputString);
         }
         if (newControllerInformation != null)
         {
-            connectedControllers.Add(newControllerInformation);
+            ControllerInformation emptyInformationSpotToAssign;
+            foreach (ControllerInformation c in connectedControllers) {
+                if (c == null) {
+                    emptyInformationSpotToAssign = c;
+                    break;
+                }
+            }
+            emptyInformationSpotToAssign = newControllerInformation;
+           // connectedControllers.Add(newControllerInformation);
+            //Change the assign panel to character select panel
         }
     }
 
@@ -104,7 +114,7 @@ public class InputSchemeAssigner : IUpdater
         //check controllers thats already been added to see if this is a duplicate.
         foreach (ControllerInformation c in connectedControllers)
         {
-            if (c.controllerOrder == controllerOrder)
+            if (c.controllerOrder == controllerOrder&&  c.controller == ControllerInformation.ControllerType.Controller)
             {
                 break;
             }
@@ -149,7 +159,7 @@ public class InputSchemeRevoker : IUpdater
     public void UpdateComponent()
     {
         string inputString = EditorToolMethod.ReturnInputString();
-        bool KeyBoardControllerCanceled = Input.GetKey(KeyCode.Escape);
+        bool KeyBoardControllerCanceled = (Input.GetAxis("Cancel") != 0) ? true : false;
         bool ControllerCanceled = inputString.Contains(InputButton.ButtonStringValues.ButtonB.ToString());
         ControllerInformation controllerInformationToRemove = null;
 
@@ -160,7 +170,10 @@ public class InputSchemeRevoker : IUpdater
 
         if (controllerInformationToRemove != null)
         {
-            connectedControllers.Remove(controllerInformationToRemove);
+            //Expected result: The referenced information in the main class is supposed to null and 
+            //not the local variable.
+            controllerInformationToRemove.controller = ControllerInformation.ControllerType.None;
+           // connectedControllers.Remove(controllerInformationToRemove);
         }
     }
 

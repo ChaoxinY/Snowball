@@ -19,11 +19,13 @@ public class Player : MonoBehaviour, IInputSchemeHolder,IMovementDataHolder
     public InputHandlerUpdater InputHandlerUpdater { get { return inputhandlerUpdater; } }
     public PowerUpInventory PowerUpInventory { get { return powerUpInventory; } }
 
+    //Read scriptableobject for different configurations
     private void Start()
     {
         inputStateFactory = new InputStateFactory();
         inputhandlerUpdater = new InputHandlerUpdater(gameObject);
-        inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(0, this, gameObject);
+        inputhandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(
+            (int)FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState, this, gameObject);
         powerUpInventory = new PowerUpInventory();
         playerCollisionHandler = new PlayerCollisionHandler(gameObject, powerUpInventory);
         movementDataHolder = Resources.Load("Prefabs/DefaultMovementDataHolder") as MovementDataHolder;

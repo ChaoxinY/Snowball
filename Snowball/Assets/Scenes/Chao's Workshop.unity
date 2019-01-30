@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93a652fb31d8094e96997843a78668c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snowBallStatusHolder: {fileID: 11400000, guid: a40b64f71bb6cf6469a2151a07b5416c,
+    type: 2}
 --- !u!1 &547907498
 GameObject:
   m_ObjectHideFlags: 0

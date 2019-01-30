@@ -12,8 +12,9 @@ public class SetRigidbodyVelocityCommand : ICommand
 
     public void Execute(GameObject actor)
     {
-        Vector3 movementDirection = stateAttachedTo.LastMovementInput;
-        float movementSpeed = actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder().MovementSpeed;
+        MovementDataHolder movementDataHolder = actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder();
+        Vector3 movementDirection = movementDataHolder.LastMovementInput;
+        float movementSpeed = movementDataHolder.MovementSpeed;
         actor.GetComponent<Rigidbody>().velocity = movementDirection.normalized * movementSpeed;
     }
 }

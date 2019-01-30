@@ -11,8 +11,9 @@ public class AddForceToRigidbodyCommand : ICommand
     }
 
     public void Execute(GameObject actor)
-    {        
-        Vector3 forceToAdd = stateAttachedTo.LastMovementInput;
+    {
+        MovementDataHolder movementDataHolder = actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder();
+        Vector3 forceToAdd = movementDataHolder.LastMovementInput;
         actor.GetComponent<Rigidbody>().AddForce(forceToAdd);
     }
 }

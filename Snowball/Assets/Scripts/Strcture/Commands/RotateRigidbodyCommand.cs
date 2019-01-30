@@ -11,9 +11,10 @@ public class RotateRigidbodyCommand : ICommand
     }
     public void Execute(GameObject actor)
     {
-        Vector3 movementDirection = stateAttachedTo.LastMovementInput;
+        MovementDataHolder movementDataHolder = actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder();
+        Vector3 movementDirection = movementDataHolder.LastMovementInput;
         Quaternion newRotaion = Quaternion.LookRotation(movementDirection);
         Transform actorTransform = actor.GetComponent<Transform>();
-        actorTransform.rotation = Quaternion.Slerp(actorTransform.rotation, newRotaion, Time.deltaTime * actor.GetComponent<IMovementDataHolder>().GetMovementDataHolder().RotationSpeed);
+        actorTransform.rotation = Quaternion.Slerp(actorTransform.rotation, newRotaion, Time.deltaTime * movementDataHolder.RotationSpeed);
     }
 }

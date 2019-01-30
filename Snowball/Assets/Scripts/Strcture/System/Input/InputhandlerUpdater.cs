@@ -8,7 +8,6 @@ public class InputHandlerUpdater : IUpdater, IFixedUpdater
 
     public InputHandlerState CurrentInputHandler { get { return currentInputHandler; } set { currentInputHandler = value; } }
 
-    //Creates its own state based on client requirement
     public InputHandlerUpdater(GameObject gameAttachedTo)
     {
         this.gameObjectAttachedTo = gameAttachedTo;

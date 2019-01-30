@@ -18,7 +18,6 @@ public static class UIToolMethods
         }
         else
         {
-            Debug.Log(canvasTransform.name);
             AddUIPanel(canvasTransform, panelName, panelName);
         }
     }

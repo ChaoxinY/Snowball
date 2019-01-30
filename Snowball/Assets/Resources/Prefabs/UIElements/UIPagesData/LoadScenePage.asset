@@ -9,37 +9,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bac671a0ddd32e42a0eff0763141157, type: 3}
-  m_Name: StartSceneUIPage
+  m_Name: LoadScenePage
   m_EditorClassIdentifier: 
   panels:
-  - panelName: SelectionPanel
-    panelPreset: {fileID: 1584815806228640, guid: 48dcb4f81497e9745967708551967bee,
+  - panelName: SceneSelectionPanel
+    panelPreset: {fileID: 1505569626352088, guid: 76e35e9899bcfdc4a9997e5bdc7d28db,
       type: 2}
     panelPosition: {x: 0, y: 0}
     panelSize: {x: 0, y: 0}
     usesCustomTransformProperty: 0
-    layout: 1
+    layout: 0
     uIButtons:
-    - buttonName: Play
-      sceneToOpen: 
-      panelToOpen: {fileID: 1264169913074654, guid: e572147da31d73442934177ffde9c17a,
-        type: 2}
-      usesCustomTransformProperty: 0
-      buttonPosition: {x: 0, y: 0}
-      buttonSize: {x: 0, y: 0}
-      buttonFunction: 4
-    - buttonName: Select Scenes
-      sceneToOpen: 
-      panelToOpen: {fileID: 1454378164739930, guid: 0257247a8134d714883b1c86e7f1018d,
-        type: 2}
-      usesCustomTransformProperty: 0
-      buttonPosition: {x: 0, y: 0}
-      buttonSize: {x: 0, y: 0}
-      buttonFunction: 4
-    - buttonName: Exit
-      sceneToOpen: 
+    - buttonName: Load Scene
+      sceneToOpen: Chao's Workshop
       panelToOpen: {fileID: 0}
       usesCustomTransformProperty: 0
       buttonPosition: {x: 0, y: 0}
       buttonSize: {x: 0, y: 0}
-      buttonFunction: 2
+      buttonFunction: 3
+    - buttonName: Load Scene 2
+      sceneToOpen: Fatih's Workshop
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 3
+    - buttonName: Return to Start
+      sceneToOpen: 
+      panelToOpen: {fileID: 1454378164739930, guid: 5d25cafab99962e49b81ba6456874863,
+        type: 2}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 4

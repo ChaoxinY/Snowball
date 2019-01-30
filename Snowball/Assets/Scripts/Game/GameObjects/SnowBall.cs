@@ -6,13 +6,13 @@ public class SnowBall : MonoBehaviour, ISnowBallStatusHolder
  {
     private Subject eventSubject;
     private SnowBallCollisionHandler snowBallCollisionHandler;
-    private SnowBallStatusHolder snowBallStatusHolder;
+    public SnowBallStatusHolder snowBallStatusHolder;
 
     private void Start()
     {
         eventSubject = GameObject.Find("GameManager").GetComponent<Subject>();
         snowBallCollisionHandler = new SnowBallCollisionHandler(gameObject, eventSubject);
-        snowBallStatusHolder = Resources.Load("Prefabs/DefaultSnowBallStatusHolder") as SnowBallStatusHolder;
+       // snowBallStatusHolder = Resources.Load("Prefabs/DefaultSnowBallStatusHolder") as SnowBallStatusHolder;
         snowBallStatusHolder.Snowball = gameObject;
     }
 

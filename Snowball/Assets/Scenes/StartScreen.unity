@@ -443,17 +443,17 @@ Prefab:
     - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
         type: 2}
@@ -524,6 +524,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224338770079986736, guid: 5d25cafab99962e49b81ba6456874863,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224128229162560412, guid: 5d25cafab99962e49b81ba6456874863,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d25cafab99962e49b81ba6456874863, type: 2}
   m_IsPrefabAsset: 0
@@ -539,6 +559,8 @@ GameObject:
   - component: {fileID: 1995154881}
   - component: {fileID: 1995154880}
   - component: {fileID: 1995154879}
+  - component: {fileID: 1995154883}
+  - component: {fileID: 1995154884}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -625,3 +647,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1995154883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995154878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57548fec2e84ea7488e1c962b2ed033b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializedUIPages: []
+  startPage: {fileID: 0}
+--- !u!114 &1995154884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995154878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9f8bf66d6b45a4cb3cf531498debcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

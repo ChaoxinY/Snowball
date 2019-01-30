@@ -3,20 +3,18 @@ using System.Collections;
 
 //Keeping functionality and stored data seperated
 //state
-public class PlayerInputHandlerDefaultState : InputHandlerState
+public class PlayerInputHandlerDefaultState : InputHandlerState, IKeyboardMouseInputHandler,IControllerInputHandler
 {
     private ICommand moveCommand, rotateCommand;
     private System.Object objectAttachedTo;
     private GameObject gameobjectAttachedTo;
-    private InputHandlerUpdater inputHandlerUpdaterAttachedTo;
     private InputScheme inputScheme;
 
     public PlayerInputHandlerDefaultState(System.Object objectAttachedTo, GameObject gameobjectAttachedTo, InputHandlerUpdater inputHandlerUpdaterAttachedTo)
     {
         this.objectAttachedTo = objectAttachedTo;
         this.gameobjectAttachedTo = gameobjectAttachedTo;
-        this.inputHandlerUpdaterAttachedTo = inputHandlerUpdaterAttachedTo;
-        inputStateFactory = new InputStateFactory();
+        this.InputHandlerUpdater = inputHandlerUpdaterAttachedTo;
         moveCommand = new SetRigidbodyVelocityCommand(this);
         rotateCommand = new RotateRigidbodyCommand(this);
         inputScheme = gameobjectAttachedTo.GetComponent<IInputSchemeHolder>().GetInputScheme();
@@ -44,7 +42,7 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
     //FactoriesProducts.InputstateProducts.PlayerInputHandlerDefaultState.ToString(), objectAttachedTo, gameobjectAttachedTo);
 
     //how is this going to handle multiple button presses
-    protected override void HandleControllerInput(string inputString)
+    public  void HandleControllerInput(string inputString)
     {
         UpdateLastMovementInput(inputScheme.ControllerOrder +"JoystickLeftHorizontal",inputScheme.ControllerOrder+"JoystickLeftVertical");
         foreach (InputButton button in inputScheme.controllerButtons)
@@ -59,7 +57,7 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
             }        
         }
     }
-    protected override void HandleKeyBoardMouseInput(string inputString) {
+    public  void HandleKeyBoardMouseInput(string inputString) {
         UpdateLastMovementInput("Horizontal","Vertical");
         switch (inputString)
         {
@@ -68,7 +66,8 @@ public class PlayerInputHandlerDefaultState : InputHandlerState
 
     private void UpdateLastMovementInput(string horizontalAxisString,string verticalAxisString)
     {
-        lastMovementInput = new Vector3(Input.GetAxis(horizontalAxisString), 0, Input.GetAxis(verticalAxisString));
+        MovementDataHolder movementDataHolder = gameobjectAttachedTo.GetComponent<IMovementDataHolder>().GetMovementDataHolder();
+        movementDataHolder.LastMovementInput = new Vector3(Input.GetAxis(horizontalAxisString), 0, Input.GetAxis(verticalAxisString));
         fixedUpdateCommands.Add(moveCommand);
         fixedUpdateCommands.Add(rotateCommand);
     }
