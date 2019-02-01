@@ -23,7 +23,7 @@ public class PlayerInputHandlerDefaultState : InputHandlerState, IKeyboardMouseI
 
     public override void HandleInput()
     {
-        string userInput = EditorToolMethod.ReturnInputString();
+        string userInput = InputToolMethod.ReturnInputString();
         if (userInput != null && inputScheme.ControllerType == ControllerInformation.ControllerType.Keyboard)
         {
             HandleKeyBoardMouseInput(userInput);

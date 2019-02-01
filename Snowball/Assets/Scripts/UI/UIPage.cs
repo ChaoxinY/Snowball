@@ -8,13 +8,14 @@ public class UIPage : MonoBehaviour
 { 
     public Transform canvasTransform;   
     public bool isActive;
+    public List<GameObject> initializedUIPanels = new List<GameObject>();
     public List<GameObject> initializedUIElements = new List<GameObject>();
     //Instead of whole class register only the necessary information
     private List<bool> focusedUIElements = new List<bool>();
     [SerializeField]
     public UIPagePreset uIPage;
     private CoroutineToolMethods coroutineToolMethods;
-    private UIPageHolder uIPageHolder;
+    public UIPageHolder uIPageHolder;
 
     public List<bool> FocusedUIElements
     {
@@ -30,13 +31,13 @@ public class UIPage : MonoBehaviour
     }
 
     private void Start()
-    {
+    {   
         canvasTransform = GameObject.Find("UICanvas").transform;
-        gameObject.AddComponent<CoroutineToolMethods>();
-        coroutineToolMethods = gameObject.GetComponent<CoroutineToolMethods>();
         uIPageHolder = canvasTransform.gameObject.GetComponent<UIPageHolder>();
         uIPageHolder.AddPage(this);
-
+        gameObject.AddComponent<CoroutineToolMethods>();
+        coroutineToolMethods = gameObject.GetComponent<CoroutineToolMethods>();
+      
         foreach (UIPanel panel in uIPage.panels)
         {
             GameObject newPanel = null;
@@ -53,6 +54,7 @@ public class UIPage : MonoBehaviour
                  //Add Layout if nessecary
                 AddPanelLayout(newPanel, panel);
             }
+            initializedUIPanels.Add(newPanel);
             //Set panel properties(size, position)             
             if (panel.usesCustomTransformProperty)
             {

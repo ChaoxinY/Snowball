@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections;
 
-public static class EditorToolMethod 
+public static class InputToolMethod 
 {
     public static string ReturnInputString()
     {
@@ -15,14 +15,23 @@ public static class EditorToolMethod
         {
             SerializedProperty axis = axisArray.GetArrayElementAtIndex(i);
             string name = axis.FindPropertyRelative("m_Name").stringValue;
+            //int axisType = axis.FindPropertyRelative("type").enumValueIndex;
             //Might not work if controller axis are considered as buttons 
-            if (Input.GetAxis(name)!=0)
+            //Not returning string when hitting buttons 
+            if (Input.GetButton(name))
             {
                 buttonString = name;
                 Debug.Log(name);
                 break;
             }
+            else if (Input.GetAxis(name) != 0)
+            {
+                buttonString = name;
+                break;
+            }
+
         }
+        Debug.Log(buttonString);
         return buttonString;
     }
 

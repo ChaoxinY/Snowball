@@ -6,29 +6,17 @@ using System.Collections.Generic;
 public class PlayerInitializer : MonoBehaviour
 {
     //totalPlayers
-    private List<ControllerInformation> connectedControllers = new List<ControllerInformation>();
+    private List<ControllerInformation> connectedControllers = new List<ControllerInformation>() { new ControllerInformation(), new ControllerInformation(), new ControllerInformation(), new ControllerInformation() };
     private InputSchemeAssigner inputSchemeAssigner;
     private InputSchemeRevoker inputSchemeRevoker;
+    private InitializePanelAdapter initializePanelAdapter;
     private List<IUpdater> updaters = new List<IUpdater>();
-
-    public List<ControllerInformation> ConnectedControllers
-    {
-        get
-        {
-            return connectedControllers;
-        }
-
-        set
-        {
-            connectedControllers = value;
-            //when set change ui
-        }
-    }
 
     private void Start()
     {
-        inputSchemeAssigner = new InputSchemeAssigner(ConnectedControllers);
-        inputSchemeRevoker = new InputSchemeRevoker(ConnectedControllers);
+        initializePanelAdapter = new InitializePanelAdapter(gameObject, connectedControllers);
+        inputSchemeAssigner = new InputSchemeAssigner(initializePanelAdapter, connectedControllers);
+        inputSchemeRevoker = new InputSchemeRevoker(connectedControllers);
         updaters.AddRange(new List<IUpdater>() { inputSchemeAssigner, inputSchemeRevoker });
     }
 
@@ -47,6 +35,7 @@ public class PlayerInitializer : MonoBehaviour
             GameObject playerCharacter = Instantiate(Resources.Load("InsertCharacterStringHere") as GameObject);
             InputScheme inputScheme = new InputScheme();
 
+            //Assign inputScheme
             if (c.controller == ControllerInformation.ControllerType.Keyboard)
             {
                 //if there is already a custom profile created, load that.
@@ -78,40 +67,43 @@ public class PlayerInitializer : MonoBehaviour
             playerCharacter.GetComponent<IInputSchemeHolder>().SetInputScheme(inputScheme);
         }
     }
+}
 
-    public class ControllerAssignerPanelChanger
+public class InitializePanelAdapter
+{
+
+    private List<PlayerInitializePanel> playerInitializePanels = new List<PlayerInitializePanel>();
+    private List<ControllerInformation> controllerInformations = new List<ControllerInformation>();
+
+    public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformation)
     {
-        //panelslot
-        private Transform canvasTransform;
-        private UIPagePreset UIPagePreset;
-        private List<UIPanel> assignPanels;
-        private List<ControllerInformation> controllerInformation;
-        public ControllerAssignerPanelChanger(Transform canvasTransform, UIPagePreset uIPagePreset, List<ControllerInformation> controllerInformation)
+        PlayerInitializePanel[] panels = gameObject.GetComponentsInChildren<PlayerInitializePanel>();
+        for (int i = 0; i < panels.Length; i++)
         {
-            this.canvasTransform = canvasTransform;
-            this.UIPagePreset = uIPagePreset;
-            for (int i = 0; i < 4; i++) {
-                assignPanels.Add(uIPagePreset.panels[i]);
-            }
-            this.controllerInformation = controllerInformation;
+            playerInitializePanels.Add(panels[i]);
         }
+        this.controllerInformations = controllerInformation;
+    }
 
-        public void UpdateAssignerPanels() {
-            for (int i = 0; i < controllerInformation.Count; i++) {
-                if(controllerInformation[i].controller == ControllerInformation.ControllerType.Controller) {
-                    UIToolMethods.AddUIPanel(canvasTransform, "Player" + i , "ControllerCharacterAssignPanel");
-                    UIToolMethods.DisableGameObject("Player" + i);
-                }
-                else if (controllerInformation[i].controller == ControllerInformation.ControllerType.Keyboard)
-                {
-                    UIToolMethods.AddUIPanel(canvasTransform, "Player" + i, "KeyBoardCharacterAssignPanel");
-                    UIToolMethods.DisableGameObject("Player" + i);
-                }
-                else if (controllerInformation[i].controller == ControllerInformation.ControllerType.None)
-                {
-                    UIToolMethods.OpenUIPanel(canvasTransform, "ControllerAssignPanel");
-                }
+    public void RefreshPanel()
+    {
+
+        int i = 0;
+        foreach (ControllerInformation c in controllerInformations)
+        {
+            switch (c.controller)
+            {
+                case ControllerInformation.ControllerType.None:
+                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.None;
+                    break;
+                case ControllerInformation.ControllerType.Controller:
+                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.ControllerCharacterSelection;
+                    break;
+                case ControllerInformation.ControllerType.Keyboard:
+                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.KeyBoardCharacterSelection;
+                    break;
             }
+            i++;
         }
     }
 }

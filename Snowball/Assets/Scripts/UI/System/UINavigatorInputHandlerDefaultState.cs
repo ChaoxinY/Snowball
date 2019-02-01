@@ -42,7 +42,6 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
                 {
                     uiPage.gameObject.SetActive(false);
                 }
-                Debug.Log("Called");
                 uIPageHolder.startPage.gameObject.SetActive(true);
             }
         }

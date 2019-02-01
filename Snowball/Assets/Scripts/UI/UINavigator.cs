@@ -8,6 +8,7 @@ public class UINavigator : MonoBehaviour
     private List<IUpdater> updaters = new List<IUpdater>();
     private IFactory inputStateFactory;
     private InputHandlerUpdater inputhandlerUpdater;
+    private EventsystemCurrentGameObjectRefresher objectRefresher;
     public IFactory InputStateFactory { get { return inputStateFactory; } }
 
     public InputHandlerUpdater InputHandlerUpdater
@@ -29,7 +30,8 @@ public class UINavigator : MonoBehaviour
         InputHandlerUpdater = new InputHandlerUpdater(gameObject);
         InputHandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(
             (int)FactoriesProducts.InputstateProducts.UINavigatorDefaultState, this, gameObject);
-        updaters.Add(InputHandlerUpdater);
+        objectRefresher = new EventsystemCurrentGameObjectRefresher(EventSystem.current);
+        updaters.AddRange(new List<IUpdater>() { InputHandlerUpdater, objectRefresher });
     }
 
     private void Update()
@@ -69,6 +71,7 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
         {
             GameObject newCurrentGameObject = SearchForActiveUIElement(uIPageHolder.initializedUIPages);
             lastSelectedGameObject.Push(newCurrentGameObject);
+            eventSystem.SetSelectedGameObject(lastSelectedGameObject.Peek());
         }
         //If current isnt the same as the first in stack and currently selected object isnt null.
         //Add this new reference
@@ -83,6 +86,7 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
         GameObject selectableUIElement = null;
         foreach (UIPage uIPage in uIPages)
         {
+          
             if (uIPage.isActive && uIPage.initializedUIElements.Count != 0)
             {
                 selectableUIElement = uIPage.initializedUIElements[0];

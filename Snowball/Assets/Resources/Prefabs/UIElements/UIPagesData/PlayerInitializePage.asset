@@ -13,13 +13,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels:
   - panelName: ControllerAssignPanel
-    panelPreset: {fileID: 1395689807466980, guid: 1dc0f9f996fcd854397f130f37b5322d,
+    panelPreset: {fileID: 1584815806228640, guid: 48dcb4f81497e9745967708551967bee,
       type: 2}
     panelPosition: {x: 0, y: 0}
-    panelSize: {x: 0, y: 0}
-    usesCustomTransformProperty: 0
+    panelSize: {x: 1, y: 1}
+    usesCustomTransformProperty: 1
     layout: 0
-    uIButtons: []
+    uIButtons:
+    - buttonName: Press Enter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0
   - panelName: ControllerCharaterSelectionPanel
     panelPreset: {fileID: 1584815806228640, guid: 48dcb4f81497e9745967708551967bee,
       type: 2}
@@ -27,7 +34,21 @@ MonoBehaviour:
     panelSize: {x: 1, y: 1}
     usesCustomTransformProperty: 1
     layout: 0
-    uIButtons: []
+    uIButtons:
+    - buttonName: Choose Charcter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0
+    - buttonName: Choose Charcter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0
   - panelName: KeyboardCharaterSelectionPanel
     panelPreset: {fileID: 1584815806228640, guid: 48dcb4f81497e9745967708551967bee,
       type: 2}
@@ -35,4 +56,25 @@ MonoBehaviour:
     panelSize: {x: 1, y: 1}
     usesCustomTransformProperty: 1
     layout: 0
-    uIButtons: []
+    uIButtons:
+    - buttonName: Choose Charcter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0
+    - buttonName: Choose Charcter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0
+    - buttonName: Choose Charcter
+      sceneToOpen: 
+      panelToOpen: {fileID: 0}
+      usesCustomTransformProperty: 0
+      buttonPosition: {x: 0, y: 0}
+      buttonSize: {x: 0, y: 0}
+      buttonFunction: 0

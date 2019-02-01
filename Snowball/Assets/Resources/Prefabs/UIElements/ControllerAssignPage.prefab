@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222242156773366266}
   - component: {fileID: 114221571004903614}
   - component: {fileID: 114566024370403270}
+  - component: {fileID: 114965392085574192}
   m_Layer: 5
   m_Name: ControllerAssignPage
   m_TagString: Untagged
@@ -69,7 +70,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasTransform: {fileID: 0}
   isActive: 0
+  initializedUIPanels: []
+  initializedUIElements: []
   uIPage: {fileID: 11400000, guid: 668b0a0e78818a24492342e7497588ba, type: 2}
+--- !u!114 &114965392085574192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264169913074654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9a1a6dc454e8c458747c086b0a41a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222242156773366266
 CanvasRenderer:
   m_ObjectHideFlags: 1

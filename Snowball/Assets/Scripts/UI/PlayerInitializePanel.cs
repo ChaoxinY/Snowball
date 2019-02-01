@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(UIPage))]
 public class PlayerInitializePanel : MonoBehaviour
 {
-    //Double Buffer
-    public panelType currentPanelType;
-    private panelType nextPanelType;
+    private List<GameObject> panels;    
+    private PanelType currentPanelType;
+    private PanelType nextPanelType;
 
-    //preset for different paneltype
-
-    public panelType NextPanelType
+    public PanelType NextPanelType
     {
         get
         {
@@ -19,10 +19,39 @@ public class PlayerInitializePanel : MonoBehaviour
         set
         {
             nextPanelType = value;
+            RefreshPanels();
         }
     }
 
-    public enum panelType { }
+    public enum PanelType
+    {
+        None,
+        ControllerCharacterSelection,
+        KeyBoardCharacterSelection,
+    }
 
+    //preset for different paneltype 
+    private void Start()
+    {
+        panels = gameObject.GetComponent<UIPage>().initializedUIPanels;
+   
+        for (int i = 1; i < panels.Count; i++) {
+            panels[i].SetActive(false);
+        }
+        currentPanelType = PanelType.None;
+        nextPanelType = PanelType.None;
+    }
 
+    public void RefreshPanels()
+    {
+        if (NextPanelType == currentPanelType)
+        {
+            return;
+        }
+        panels[(int)currentPanelType].SetActive(false);
+        panels[(int)NextPanelType].SetActive(true);
+        currentPanelType = nextPanelType;
+    }
 }
+
+
