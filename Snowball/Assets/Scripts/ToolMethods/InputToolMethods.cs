@@ -2,8 +2,28 @@
 using UnityEditor;
 using System.Collections;
 
-public static class InputToolMethod 
+public static class InputToolMethod
 {
+    public static string lastInputString =null;
+
+    public static bool IsInputRepeated() {
+        Debug.Log("Called");
+        bool isRepeated = false;
+        if (ReturnInputString() == null)
+        {
+            lastInputString = null;        
+        }
+        if (ReturnInputString() == lastInputString) {
+            isRepeated = true;
+        }
+        else if (ReturnInputString() != lastInputString)
+        {
+            lastInputString = ReturnInputString();
+        }
+        return isRepeated;
+
+    }
+
     public static string ReturnInputString()
     {
         string buttonString = null;
@@ -21,7 +41,6 @@ public static class InputToolMethod
             if (Input.GetButton(name))
             {
                 buttonString = name;
-                Debug.Log(name);
                 break;
             }
             else if (Input.GetAxis(name) != 0)
@@ -31,8 +50,12 @@ public static class InputToolMethod
             }
 
         }
-        Debug.Log(buttonString);
         return buttonString;
+    }
+
+    public static string ReturnJoyStickOrder(string inputString) {
+        string JoyStickOrder = inputString.Substring(0, 3);
+        return JoyStickOrder;
     }
 
 }

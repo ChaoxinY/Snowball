@@ -69,6 +69,7 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
         //this or == false
         else if (!eventSystem.currentSelectedGameObject.activeInHierarchy)
         {
+            Debug.Log("Called");
             GameObject newCurrentGameObject = SearchForActiveUIElement(uIPageHolder.initializedUIPages);
             lastSelectedGameObject.Push(newCurrentGameObject);
             eventSystem.SetSelectedGameObject(lastSelectedGameObject.Peek());
@@ -86,10 +87,13 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
         GameObject selectableUIElement = null;
         foreach (UIPage uIPage in uIPages)
         {
-          
             if (uIPage.isActive && uIPage.initializedUIElements.Count != 0)
             {
-                selectableUIElement = uIPage.initializedUIElements[0];
+                foreach (GameObject initializedUIElement in uIPage.initializedUIElements) {
+                    if (initializedUIElement.activeInHierarchy) {
+                        selectableUIElement = initializedUIElement;
+                    }
+                }             
             }
         }
         return selectableUIElement;

@@ -11,13 +11,13 @@ public class UIPage : MonoBehaviour
     public List<GameObject> initializedUIPanels = new List<GameObject>();
     public List<GameObject> initializedUIElements = new List<GameObject>();
     //Instead of whole class register only the necessary information
-    private List<bool> focusedUIElements = new List<bool>();
+    private List<IFocusUIElement> focusedUIElements = new List<IFocusUIElement>();
     [SerializeField]
     public UIPagePreset uIPage;
     private CoroutineToolMethods coroutineToolMethods;
     public UIPageHolder uIPageHolder;
 
-    public List<bool> FocusedUIElements
+    public List<IFocusUIElement> FocusedUIElements
     {
         get
         {
@@ -84,6 +84,11 @@ public class UIPage : MonoBehaviour
     private void OnEnable()
     {
         isActive = true;
+        //foreach (GameObject g in initializedUIPanels) {
+        //    if (!g.activeInHierarchy) {
+        //        g.SetActive(true);
+        //    }
+        //}
     }
 
     private void AddPanelLayout(GameObject panel, UIPanel panelData)

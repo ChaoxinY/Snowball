@@ -16,14 +16,12 @@ public class PlayerInitializer : MonoBehaviour
     {
         initializePanelAdapter = new InitializePanelAdapter(gameObject, connectedControllers);
         inputSchemeAssigner = new InputSchemeAssigner(initializePanelAdapter, connectedControllers);
-        inputSchemeRevoker = new InputSchemeRevoker(connectedControllers);
+        inputSchemeRevoker = new InputSchemeRevoker(initializePanelAdapter, connectedControllers);
         updaters.AddRange(new List<IUpdater>() { inputSchemeAssigner, inputSchemeRevoker });
     }
 
     private void Update()
     {
-        //Worth to store this as an static method?
-        //For now i say yes because two classes already repeat this code
         SystemToolMethods.UpdateIUpdaters(updaters);
     }
 
@@ -69,41 +67,3 @@ public class PlayerInitializer : MonoBehaviour
     }
 }
 
-public class InitializePanelAdapter
-{
-
-    private List<PlayerInitializePanel> playerInitializePanels = new List<PlayerInitializePanel>();
-    private List<ControllerInformation> controllerInformations = new List<ControllerInformation>();
-
-    public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformation)
-    {
-        PlayerInitializePanel[] panels = gameObject.GetComponentsInChildren<PlayerInitializePanel>();
-        for (int i = 0; i < panels.Length; i++)
-        {
-            playerInitializePanels.Add(panels[i]);
-        }
-        this.controllerInformations = controllerInformation;
-    }
-
-    public void RefreshPanel()
-    {
-
-        int i = 0;
-        foreach (ControllerInformation c in controllerInformations)
-        {
-            switch (c.controller)
-            {
-                case ControllerInformation.ControllerType.None:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.None;
-                    break;
-                case ControllerInformation.ControllerType.Controller:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.ControllerCharacterSelection;
-                    break;
-                case ControllerInformation.ControllerType.Keyboard:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.KeyBoardCharacterSelection;
-                    break;
-            }
-            i++;
-        }
-    }
-}

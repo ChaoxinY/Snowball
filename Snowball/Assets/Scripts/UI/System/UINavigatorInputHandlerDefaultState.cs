@@ -17,8 +17,7 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
         //Check for focused ui element which is is an interface bool that becomes true when on edit event is received
         //and false when oncancel event is recevied.
         //The page stores all focusable ui elements and the currently focused element.
-
-        if (Input.GetAxis("Cancel") != 0)
+        if (!InputToolMethod.IsInputRepeated() && Input.GetAxis("Cancel") != 0)
         {
             //Close current panel
             bool returnToStartPage = true;
@@ -26,8 +25,9 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
             {
                 if (uiPage.isActive)
                 {
-                    foreach (bool focused in uiPage.FocusedUIElements)
+                    foreach (IFocusUIElement focusElement in uiPage.FocusedUIElements)
                     {
+                        bool focused = focusElement.IsThisElementInFocus();
                         if (focused)
                         {
                             returnToStartPage = false;
@@ -40,15 +40,18 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
             {
                 foreach (UIPage uiPage in uIPageHolder.initializedUIPages)
                 {
-                    uiPage.gameObject.SetActive(false);
+                    if (uiPage.GetComponent<IFocusUIElement>() == null)
+                    {
+                        uiPage.gameObject.SetActive(false);
+                    }
                 }
-                uIPageHolder.startPage.gameObject.SetActive(true);
+                UIToolMethods.OpenUIPanel(uIPageHolder.startPage.canvasTransform, uIPageHolder.startPage.gameObject.name);
             }
         }
         // Change to In game state
         //Condition
-    //    inputHandlerUpdaterAttachedTo.CurrentInputHandler = (InputHandlerState)inputStateFactory.CreateProduct(
-    //(int)FactoriesProducts.InputstateProducts.UINavigatorInGameState,this );
+        //    inputHandlerUpdaterAttachedTo.CurrentInputHandler = (InputHandle rState)inputStateFactory.CreateProduct(
+        //(int)FactoriesProducts.InputstateProducts.UINavigatorInGameState,this );
     }
 }
 

@@ -19,13 +19,18 @@ public class InputButton
 
 public class ControllerInformation
 {
-    public string controllerOrder;
+    public string controllerOrder = null;
     public ControllerType controller = ControllerType.None;
     public enum ControllerType
     {
         None,
         Controller,
         Keyboard
+    }
+    public void ResetControllerInformation()
+    {
+        controllerOrder = null;
+        controller = ControllerType.None;
     }
 }
 
@@ -69,15 +74,15 @@ public class InputScheme : ScriptableObject
         controllerButtons.AddRange(new List<InputButton>() { buttonA });
     }
 }
+
 //Detect controller connection
 public class InputSchemeAssigner : IUpdater
 {
     private List<ControllerInformation> connectedControllers = new List<ControllerInformation>();
     private InitializePanelAdapter initializePanelAdapter;
-    private string lastInputString;
 
     //Pass the adapter instead the object class to seperate functionality
-    public InputSchemeAssigner(InitializePanelAdapter initializePanelAdapter,List<ControllerInformation> connectedControllers)
+    public InputSchemeAssigner(InitializePanelAdapter initializePanelAdapter, List<ControllerInformation> connectedControllers)
     {
         // currentConnectedControllers = connectedControllers;
         this.initializePanelAdapter = initializePanelAdapter;
@@ -86,24 +91,17 @@ public class InputSchemeAssigner : IUpdater
 
     public void UpdateComponent()
     {
-        if (InputToolMethod.ReturnInputString() == null)
-        {
-            lastInputString = null;
-        }
-        if (InputToolMethod.ReturnInputString() != null && InputToolMethod.ReturnInputString() != lastInputString)
+        if (InputToolMethod.ReturnInputString() != null)
         {
             string inputString = InputToolMethod.ReturnInputString();
-            Debug.Log(inputString);
-            lastInputString = inputString;
             bool keyBoardInput = inputString.Contains("Submit");
             bool controllerInput = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
             if (keyBoardInput)
-            {               
+            {
                 AddKeyboardControllerInformation();
             }
             else if (controllerInput)
             {
-                Debug.Log("Called");
                 AddControllerInformation(inputString);
             }
         }
@@ -112,20 +110,21 @@ public class InputSchemeAssigner : IUpdater
     //Code duplication
     private void AddControllerInformation(string inputString)
     {
-        string controllerOrder = inputString.Substring(0, 3);
+        string controllerOrder = InputToolMethod.ReturnJoyStickOrder(inputString);
         //check controllers thats already been added to see if this is a duplicate.
         for (int i = 0; i < connectedControllers.Count; i++)
         {
             //Controllers should be unique and not added through one controller
             //and controller order isnt any of the previous
             bool controlleOrderRepeated = false;
-            for (int j = 0; j < connectedControllers.Count; j++) {
-                if (controllerOrder == connectedControllers[j].controllerOrder) {
+            for (int j = 0; j < connectedControllers.Count; j++)
+            {
+                if (controllerOrder == connectedControllers[j].controllerOrder)
+                {
                     controlleOrderRepeated = true;
                 }
             }
-            Debug.Log(controlleOrderRepeated + controllerOrder);
-            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None&& !controlleOrderRepeated)
+            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None && !controlleOrderRepeated)
             {
                 connectedControllers[i] = new ControllerInformation();
                 connectedControllers[i].controllerOrder = controllerOrder;
@@ -148,7 +147,7 @@ public class InputSchemeAssigner : IUpdater
                     controlleOrderRepeated = true;
                 }
             }
-            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None&& !controlleOrderRepeated)
+            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None && !controlleOrderRepeated)
             {
                 connectedControllers[i] = new ControllerInformation();
                 connectedControllers[i].controller = ControllerInformation.ControllerType.Keyboard;
@@ -162,9 +161,11 @@ public class InputSchemeAssigner : IUpdater
 public class InputSchemeRevoker : IUpdater
 {
     private List<ControllerInformation> connectedControllers = new List<ControllerInformation>();
+    private InitializePanelAdapter initializePanelAdapter;
 
-    public InputSchemeRevoker(List<ControllerInformation> connectedControllers)
+    public InputSchemeRevoker(InitializePanelAdapter initializePanelAdapter, List<ControllerInformation> connectedControllers)
     {
+        this.initializePanelAdapter = initializePanelAdapter;
         this.connectedControllers = connectedControllers;
     }
 
@@ -173,42 +174,46 @@ public class InputSchemeRevoker : IUpdater
         if (InputToolMethod.ReturnInputString() != null)
         {
             string inputString = InputToolMethod.ReturnInputString();
-            bool KeyBoardControllerCanceled = (Input.GetAxis("Cancel") != 0) ? true : false;
+            bool KeyBoardControllerCanceled = inputString.Contains("Cancel");
             bool ControllerCanceled = inputString.Contains(InputButton.ButtonStringValues.ButtonB.ToString());
-            ControllerInformation controllerInformationToRemove = null;
 
-            if (KeyBoardControllerCanceled || ControllerCanceled)
+            if (ControllerCanceled)
             {
-                controllerInformationToRemove = CheckIfThisControllerInformationExsist(inputString);
+                RemoveControllerInformation(inputString);
+                //controllerInformationToRemove = CheckIfThisControllerInformationExsist(inputString);
             }
-
-            if (controllerInformationToRemove != null)
+            else if (KeyBoardControllerCanceled)
             {
-                //Expected result: The referenced information in the main class is supposed to null and 
-                //not the local variable.
-                controllerInformationToRemove.controller = ControllerInformation.ControllerType.None;
-                // connectedControllers.Remove(controllerInformationToRemove);
+                RemoveKeyboardControllerInformation();
             }
         }
     }
 
-    private ControllerInformation CheckIfThisControllerInformationExsist(string inputString)
+    private void RemoveControllerInformation(string inputString)
     {
-        ControllerInformation controllerInformation = null;
-        string controllerOrder = inputString.Substring(0, 3);
-        foreach (ControllerInformation c in connectedControllers)
+        string controllerOrder = InputToolMethod.ReturnJoyStickOrder(inputString);
+        for (int i = 0; i < connectedControllers.Count; i++)
         {
-            if (c.controllerOrder == controllerOrder)
+            if (connectedControllers[i].controllerOrder == controllerOrder && connectedControllers[i].controller == ControllerInformation.ControllerType.Controller)
             {
-                controllerInformation = c;
-                break;
-            }
-            else if (c.controller == ControllerInformation.ControllerType.Keyboard)
-            {
-                controllerInformation = c;
+                connectedControllers[i].ResetControllerInformation();
+                initializePanelAdapter.RefreshPanel();
                 break;
             }
         }
-        return controllerInformation;
+    }
+
+    private void RemoveKeyboardControllerInformation()
+    {
+        for (int i = 0; i < connectedControllers.Count; i++)
+        {
+            if (connectedControllers[i].controller == ControllerInformation.ControllerType.Keyboard)
+            {
+                connectedControllers[i].ResetControllerInformation();
+                initializePanelAdapter.RefreshPanel();
+                break;
+            }
+        }
     }
 }
+
