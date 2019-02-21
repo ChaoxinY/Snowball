@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class SnowBall : MonoBehaviour, ISnowBallStatusHolder
  {
-    private Subject eventSubject;
+	[SerializeField]
+    private EventSubject eventSubject;
     private SnowBallCollisionHandler snowBallCollisionHandler;
     public SnowBallStatusHolder snowBallStatusHolder;
 
     private void Start()
     {
-        eventSubject = GameObject.Find("GameManager").GetComponent<Subject>();
+        //eventSubject = GameObject.Find("GameManager").GetComponent<Subject>();
         snowBallCollisionHandler = new SnowBallCollisionHandler(gameObject, eventSubject);
        // snowBallStatusHolder = Resources.Load("Prefabs/DefaultSnowBallStatusHolder") as SnowBallStatusHolder;
         snowBallStatusHolder.Snowball = gameObject;
-    }
+	}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,11 +24,11 @@ public class SnowBall : MonoBehaviour, ISnowBallStatusHolder
 
     public SnowBallStatusHolder GetSnowBallStatusHolder()
     {
-        throw new System.NotImplementedException();
+		return snowBallStatusHolder;
     }
 
     public void SetSnowBallStatusHolder(SnowBallStatusHolder snowBallStatusHolder)
     {
-        throw new System.NotImplementedException();
+		this.snowBallStatusHolder = snowBallStatusHolder;
     }
 }

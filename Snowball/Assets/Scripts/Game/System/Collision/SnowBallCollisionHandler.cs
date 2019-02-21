@@ -2,31 +2,38 @@
 using System.Collections;
 
 //Component
-public class SnowBallCollisionHandler : ICollideAble
+//EventSender
+
+public class SnowBallCollisionHandler : ICollideAble,IEventPublisher
 {
-    private GameObject gameObjectAttachedTo;
-    private Subject subject;
+	private GameObject gameObjectAttachedTo;
+	private EventSubject subject;
 
-    public SnowBallCollisionHandler(GameObject gameObjectAttachedTo, Subject subjectToSubscribe) {
-        this.gameObjectAttachedTo = gameObjectAttachedTo;
-        subject = subjectToSubscribe;
-    }
+	public event System.EventHandler<GameObjectEventArgs> CollidedWithGoal;
 
-    private void Start()
-    {
-        subject = GameObject.Find("GameManager").GetComponent<Subject>();
-    }
+	public SnowBallCollisionHandler(GameObject gameObjectAttachedTo, EventSubject subjectToSubscribe)
+	{
+		this.gameObjectAttachedTo = gameObjectAttachedTo;
+		subject = subjectToSubscribe;
+		subject.SubscribeEventPublisher(this);
+	}
 
-    public void ReactToCollision(Collision collision)
-    {
-        switch (collision.gameObject.tag)
-        {
-            case "Goal":
-                Debug.Log(gameObjectAttachedTo.GetComponent<SnowBallStatusHolder>());
-                Debug.Log(collision.gameObject.GetComponent<GoalStatusHolder>());
-                gameObjectAttachedTo.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder().LastContactedGoalID = collision.gameObject.GetComponent<GoalStatusHolder>().GoalID;
-                subject.Notify("GoalEvent", new GameObject[] { gameObjectAttachedTo });
-                break;
-        }
-    }
+	public void ReactToCollision(Collision collision)
+	{
+		switch (collision.gameObject.tag)
+		{
+			case "Goal":
+				gameObjectAttachedTo.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder().LastContactedGoalID = collision.gameObject.GetComponent<GoalStatusHolder>().GoalID;
+				//subject.Notify("GoalEvent", new GameObject[] { gameObjectAttachedTo });
+				OnCollisionWithGoal(collision.gameObject);
+				break;
+		}
+	}
+	protected virtual void OnCollisionWithGoal(GameObject gameObject)
+	{
+		if (CollidedWithGoal == null) {
+			Debug.Log("Null");
+		}
+		CollidedWithGoal(this, new GameObjectEventArgs(gameObject));
+	}
 }

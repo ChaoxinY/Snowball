@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93a652fb31d8094e96997843a78668c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSubject: {fileID: 1342113901}
   snowBallStatusHolder: {fileID: 11400000, guid: a40b64f71bb6cf6469a2151a07b5416c,
     type: 2}
 --- !u!1 &547907498
@@ -240,8 +241,8 @@ GameObject:
   - component: {fileID: 547907503}
   - component: {fileID: 547907502}
   - component: {fileID: 547907501}
-  - component: {fileID: 547907499}
   - component: {fileID: 547907500}
+  - component: {fileID: 547907499}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Goal
@@ -257,12 +258,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 547907498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8250d7246457848b8eeb5782fc06ee, type: 3}
+  m_Script: {fileID: 11500000, guid: f0489497e7df7b949a29e5ca2a8c7f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiGoalScoreTexts:
   - {fileID: 1590299073}
   - {fileID: 1871301295}
+  eventSubject: {fileID: 1342113901}
 --- !u!114 &547907500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +615,7 @@ GameObject:
   - component: {fileID: 1235260127}
   - component: {fileID: 1235260126}
   - component: {fileID: 1235260125}
+  - component: {fileID: 1235260129}
   - component: {fileID: 1235260124}
   m_Layer: 0
   m_Name: Goal (1)
@@ -629,12 +632,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1235260123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8250d7246457848b8eeb5782fc06ee, type: 3}
+  m_Script: {fileID: 11500000, guid: f0489497e7df7b949a29e5ca2a8c7f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiGoalScoreTexts:
   - {fileID: 1590299073}
   - {fileID: 1871301295}
+  eventSubject: {fileID: 1342113901}
 --- !u!65 &1235260125
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -702,6 +706,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 86.712006, z: 0}
+--- !u!114 &1235260129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235260123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac478311d3de814bb0d6c69cdda731b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalID: 1
 --- !u!1001 &1246056956
 Prefab:
   m_ObjectHideFlags: 0
@@ -838,6 +854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342113900}
   - component: {fileID: 1342113899}
+  - component: {fileID: 1342113901}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -869,6 +886,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1342113901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342113898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da1a9603d1ebfe469c33d34345b1acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1590299072
 GameObject:
   m_ObjectHideFlags: 0
