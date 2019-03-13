@@ -42,7 +42,7 @@ public class UIPage : MonoBehaviour
         {
             GameObject newPanel = null;
 
-            //InitializePanel
+            //InitializePanel 
             //Load prefab panel if given
             if (panel.panelPreset != null)
             {
