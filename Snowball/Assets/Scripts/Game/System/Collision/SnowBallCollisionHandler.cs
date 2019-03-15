@@ -24,16 +24,16 @@ public class SnowBallCollisionHandler : ICollideAble,IEventPublisher
 		{
 			case "Goal":
 				gameObjectAttachedTo.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder().LastContactedGoalID = collision.gameObject.GetComponent<GoalStatusHolder>().GoalID;
-				//subject.Notify("GoalEvent", new GameObject[] { gameObjectAttachedTo });
 				OnCollisionWithGoal(collision.gameObject);
 				break;
 		}
 	}
 	protected virtual void OnCollisionWithGoal(GameObject gameObject)
 	{
-		if (CollidedWithGoal == null) {
+		if (CollidedWithGoal == null)
+		{
 			Debug.Log("Null");
 		}
-		CollidedWithGoal(this, new GameObjectEventArgs(gameObject));
+		CollidedWithGoal(this, new GameObjectEventArgs(gameObjectAttachedTo));
 	}
 }

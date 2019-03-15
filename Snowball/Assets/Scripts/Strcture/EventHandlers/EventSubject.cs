@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class EventSubject : MonoBehaviour
 {
-	private List<IEventPublisher> eventPublishers = new List<IEventPublisher>();
+	private List<System.Object> eventPublishers = new List<System.Object>();
 
-	public List<IEventPublisher> EventPublishers
+	public List<System.Object> EventPublishers
 	{
 		get
 		{
@@ -19,13 +20,13 @@ public class EventSubject : MonoBehaviour
 		}
 	}
 
-	public void SubscribeEventPublisher(IEventPublisher eventPublisher)
+	public void SubscribeEventPublisher(System.Object eventPublisher)
 	{
 		EventPublishers.Add(eventPublisher);
 		Debug.Log(eventPublisher);
 	}
 
-	public void RemoveEventPublisher(IEventPublisher eventPublisher)
+	public void RemoveEventPublisher(System.Object eventPublisher)
 	{
 		EventPublishers.Remove(eventPublisher);
 	}

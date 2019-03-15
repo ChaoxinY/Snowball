@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ public class GoalScoreRegister : MonoBehaviour, IEventHandler
 
 	public void OnCollisionWithGoal(object source, GameObjectEventArgs args)
 	{
+		Debug.Log("Called");
 		SnowBallStatusHolder snowBallStatusManager = args.GameObject.GetComponent<ISnowBallStatusHolder>().GetSnowBallStatusHolder();
 		int ballPointValue = snowBallStatusManager.SnowBallPointValue;
 		int goalID = snowBallStatusManager.LastContactedGoalID;
@@ -45,16 +47,11 @@ public class GoalScoreRegister : MonoBehaviour, IEventHandler
 
 	public void SubscribeEvent()
 	{
-		Debug.Log("Called");
-		foreach (IEventPublisher eventPublisher in eventSubject.EventPublishers)
+		foreach (System.Object eventPublisher in eventSubject.EventPublishers)
 		{
-			Debug.Log(eventPublisher);
-			SnowBallCollisionHandler snowBallCollisionHandler = new SnowBallCollisionHandler(gameObject,eventSubject);
-			
-			if (typeof(IEventPublisher).IsAssignableFrom(snowBallCollisionHandler.GetType()))
+			if (eventPublisher.GetType()== typeof(SnowBallCollisionHandler))
 			{
-				Debug.Log("Called");
-				 snowBallCollisionHandler = (SnowBallCollisionHandler)eventPublisher;
+				SnowBallCollisionHandler snowBallCollisionHandler = (SnowBallCollisionHandler)eventPublisher;
 				snowBallCollisionHandler.CollidedWithGoal += OnCollisionWithGoal;			
 			}
 		}
