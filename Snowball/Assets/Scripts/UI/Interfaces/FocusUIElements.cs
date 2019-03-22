@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface IFocusUIElement
+﻿public interface IFocusUIElement
 {
     bool IsThisElementInFocus();
 }

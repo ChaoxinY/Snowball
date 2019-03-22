@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSnowBallStatusHolder", menuName = "Dataholders/SnowBallStatusHolder")]
 public class SnowBallStatusHolder : ScriptableObject
 {
-    private int lastContactedGoalID; 
     [SerializeField]
     private int snowBallPointValue;
     [SerializeField]
     private float snowBallSizeMultiplier;
-    private GameObject snowball,snowballOwner;
-     
-    public int SnowBallPointValue
+	public GameObject Snowball { get { return Snowball; } set { Snowball = value; } }
+	public GameObject SnowballOwner { get { return SnowballOwner; } set { SnowballOwner = value; } }
+	public int LastContactedGoalID { get { return LastContactedGoalID; } set { LastContactedGoalID = value; } }
+
+	public int SnowBallPointValue
     {
         get
         {
@@ -22,32 +21,6 @@ public class SnowBallStatusHolder : ScriptableObject
         set
         {   
             snowBallPointValue = value;
-        }
-    }
-
-    public int LastContactedGoalID
-    {
-        get
-        {
-            return lastContactedGoalID;
-        }
-
-        set
-        {
-            lastContactedGoalID = value;
-        }
-    }
-
-    public GameObject Snowball
-    {
-        get
-        {
-            return snowball;
-        }
-
-        set
-        {
-            snowball = value;
         }
     }
 
@@ -64,22 +37,9 @@ public class SnowBallStatusHolder : ScriptableObject
             if (snowBallSizeMultiplier > 3) {
                 snowBallSizeMultiplier = 3;
             }
-            //Make a resizer component from this
-            //Changing local scale has nothing to do with storing or accessing data
-            snowball.transform.localScale = Vector3.one * snowBallSizeMultiplier;
-        }
-    }
-
-    public GameObject SnowballOwner
-    {
-        get
-        {
-            return snowballOwner;
-        }
-
-        set
-        {
-            snowballOwner = value;
+			//Make a resizer component from this
+			//Changing local scale has nothing to do with storing or accessing data
+			Snowball.transform.localScale = Vector3.one * snowBallSizeMultiplier;
         }
     }
 }

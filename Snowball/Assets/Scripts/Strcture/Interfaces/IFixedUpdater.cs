@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface IFixedUpdater
+﻿public interface IFixedUpdater
 {
     void FixedUpdateComponent();   
 }

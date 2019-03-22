@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 public class EventSubject : MonoBehaviour
 {
-	private List<System.Object> eventPublishers = new List<System.Object>();
+	private List<object> eventPublishers = new List<object>();
 
-	public List<System.Object> EventPublishers
+	public List<object> EventPublishers
 	{
 		get
 		{

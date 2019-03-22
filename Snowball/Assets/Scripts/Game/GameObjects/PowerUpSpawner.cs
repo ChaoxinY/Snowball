@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour
 {
@@ -16,5 +15,4 @@ public class PowerUpSpawner : MonoBehaviour
         randomGridSpawner = new RandomGridSpawner(gameObjectSpawnPool, spawnPlatform, spawnInterval);
         StartCoroutine(randomGridSpawner.SpawnLoop());
     }
-
 }

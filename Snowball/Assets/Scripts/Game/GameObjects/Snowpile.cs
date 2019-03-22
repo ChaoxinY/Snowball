@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 /*
  *Responsibility : Adds values to snowball status holder
  */

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public interface IPowerUpHolder 
+﻿public interface IPowerUpHolder 
 {
     void CollectPowerUp(PowerUp powerUpToCollect);
 }

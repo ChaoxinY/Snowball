@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
 
 //Coupling : None, there is no coupling between this class and other classes in the codebase.

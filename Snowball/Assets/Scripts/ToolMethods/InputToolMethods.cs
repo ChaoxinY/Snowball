@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 public static class InputToolMethod
 {
@@ -21,7 +20,6 @@ public static class InputToolMethod
             lastInputString = ReturnInputString();
         }
         return isRepeated;
-
     }
 
     public static string ReturnInputString()

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace FactoriesProducts
+﻿namespace FactoriesProducts
 {
     public enum InputstateProducts
     {
