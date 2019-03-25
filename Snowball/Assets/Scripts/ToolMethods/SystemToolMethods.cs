@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
 public static class SystemToolMethods
 {
@@ -54,4 +55,23 @@ public static class SystemToolMethods
             updater.UpdateComponent();
         }
     }
+
+	public static void RecursionSearch(Transform transform,object objecTypeTocheck,List<object> resultList)
+	{
+		if (transform.childCount > 0)
+		{
+			Transform[] childTransforms = transform.GetComponentsInChildren<Transform>();
+			for (int i = 0; i < childTransforms.Length; i++)
+			{
+				if (childTransforms[i] != transform)
+				{
+					if (childTransforms[i].GetComponent<object>() != null)
+					{
+						resultList.Add(childTransforms[i].GetComponent<object>());
+					}
+					RecursionSearch(childTransforms[i], objecTypeTocheck, resultList);
+				}
+			}	
+		}
+	}
 }

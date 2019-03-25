@@ -18,6 +18,7 @@ public class SnowBall : MonoBehaviour, ISnowBallStatusHolder
 		snowBallCollisionHandler.ReactToCollision(collision);
 	}
 
+	#region Interface variables
 	public SnowBallStatusHolder GetSnowBallStatusHolder()
 	{
 		return snowBallStatusHolder;
@@ -27,4 +28,5 @@ public class SnowBall : MonoBehaviour, ISnowBallStatusHolder
 	{
 		this.snowBallStatusHolder = snowBallStatusHolder;
 	}
+	#endregion
 }

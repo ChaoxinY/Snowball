@@ -54,7 +54,8 @@ public class Player : MonoBehaviour, IInputSchemeHolder,IMovementDataHolder
         }
     }
 
-    public InputScheme GetInputScheme()
+	#region Interface variables
+	public InputScheme GetInputScheme()
     {
         return inputScheme;
     }
@@ -73,4 +74,5 @@ public class Player : MonoBehaviour, IInputSchemeHolder,IMovementDataHolder
     {
         this.movementDataHolder = movementDataHolder;
     }
+	#endregion
 }
