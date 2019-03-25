@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(UIPage))]
 public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 {
     private bool focused;
-    private UIPage uIPage;
+	[SerializeField]
+    private UIPanel uIPanel;
     private List<GameObject> panels;
     private PanelType currentPanelType;
     private PanelType nextPanelType;
@@ -33,10 +33,9 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 
     //preset for different paneltype 
     private void Start()
-    {
-        uIPage = gameObject.GetComponent<UIPage>();
-        panels = uIPage.initializedUIPanels;
-        uIPage.FocusedUIElements.Add(this);
+    {   
+       panels = uIPanel.SelectableUIElements;
+        uIPanel.FocusUIElements.Add(this);
         for (int i = 1; i < panels.Count; i++)
         {
             panels[i].SetActive(false);

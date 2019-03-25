@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 //Event Receiver
-public class GoalScoreRegister : MonoBehaviour, IEventHandler
+public class GoalScoreRegister : MonoBehaviour
 {
 	[SerializeField]
 	private Text[] uiGoalScoreTexts;

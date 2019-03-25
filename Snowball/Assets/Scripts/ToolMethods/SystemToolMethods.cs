@@ -56,7 +56,13 @@ public static class SystemToolMethods
         }
     }
 
-	public static void RecursionSearch(Transform transform,object objecTypeTocheck,List<object> resultList)
+	/// <summary>
+	/// Look for object type in transform type. 
+	/// </summary>
+	/// <param name="transform">Parent transform</param>
+	/// <param name="objecTypeTocheck">Type To search</param>
+	/// <param name="resultList">List to store</param>
+	public static void RecursionSearch<T>(Transform transform,object objecTypeTocheck,List<T> resultList)
 	{
 		if (transform.childCount > 0)
 		{
@@ -67,7 +73,7 @@ public static class SystemToolMethods
 				{
 					if (childTransforms[i].GetComponent<object>() != null)
 					{
-						resultList.Add(childTransforms[i].GetComponent<object>());
+						resultList.Add(childTransforms[i].GetComponent<T>());
 					}
 					RecursionSearch(childTransforms[i], objecTypeTocheck, resultList);
 				}

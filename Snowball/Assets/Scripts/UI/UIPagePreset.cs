@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NewUIPagePreset", menuName = "UI/UIPagePreset")]
+/*[CreateAssetMenu(fileName = "NewUIPagePreset", menuName = "UI/UIPagePreset")]
 public class UIPagePreset : ScriptableObject
 {
     public List<UIPanel> panels;
@@ -43,4 +43,4 @@ public class UIButton
         LoadScene,
         OpenUIPage,
     }
-}
+}*/

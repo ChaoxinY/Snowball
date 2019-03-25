@@ -7,9 +7,11 @@ public class SnowBallStatusHolder : ScriptableObject
     private int snowBallPointValue;
     [SerializeField]
     private float snowBallSizeMultiplier;
-	public GameObject Snowball { get { return Snowball; } set { Snowball = value; } }
-	public GameObject SnowballOwner { get { return SnowballOwner; } set { SnowballOwner = value; } }
-	public int LastContactedGoalID { get { return LastContactedGoalID; } set { LastContactedGoalID = value; } }
+	private GameObject snowball, snowBallOwner;
+	private int lastContactedGoalID;
+	public GameObject Snowball { get { return snowball; } set { snowball = value; } }
+	public GameObject SnowballOwner { get { return snowBallOwner; } set { snowBallOwner = value; } }
+	public int LastContactedGoalID { get { return lastContactedGoalID; } set { lastContactedGoalID = value; } }
 
 	public int SnowBallPointValue
     {

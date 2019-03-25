@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UIPage : MonoBehaviour
+/*public class UIPage : MonoBehaviour
 { 
     public Transform canvasTransform;   
     public bool isActive;
@@ -145,3 +145,4 @@ public class UIPage : MonoBehaviour
         return newButton;
     }
 }
+*/

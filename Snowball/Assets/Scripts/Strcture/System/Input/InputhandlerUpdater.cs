@@ -3,7 +3,8 @@
 public class InputHandlerUpdater : IUpdater, IFixedUpdater
 {
     private GameObject gameObjectAttachedTo;
-    public InputHandlerState CurrentInputHandler { get { return CurrentInputHandler; } set { CurrentInputHandler = value; } }
+	private InputHandlerState currentInputHandler;
+	public InputHandlerState CurrentInputHandler { get { return currentInputHandler; } set { currentInputHandler = value; } }
 
     public InputHandlerUpdater(GameObject gameAttachedTo)
     {

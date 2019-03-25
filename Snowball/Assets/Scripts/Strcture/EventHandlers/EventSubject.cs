@@ -1,31 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class EventSubject : MonoBehaviour
+public class EventSubject : MonoBehaviour, ISubject
 {
 	private List<object> eventPublishers = new List<object>();
+	public List<object> EventPublishers { get { return eventPublishers; } set { eventPublishers = value; } }
 
-	public List<object> EventPublishers
+	public void Subscribe<T>(T item)
 	{
-		get
+		if (item is object eventPublisher)
 		{
-			return eventPublishers;
-		}
-
-		set
-		{
-			eventPublishers = value;
+			EventPublishers.Add(eventPublisher);
 		}
 	}
-
-	public void SubscribeEventPublisher(System.Object eventPublisher)
+	public void UnSubscribe<T>(T item)
 	{
-		EventPublishers.Add(eventPublisher);
-		Debug.Log(eventPublisher);
-	}
-
-	public void RemoveEventPublisher(System.Object eventPublisher)
-	{
-		EventPublishers.Remove(eventPublisher);
+		if (item is object eventPublisher)
+		{
+			EventPublishers.Remove(eventPublisher);
+		}
 	}
 }

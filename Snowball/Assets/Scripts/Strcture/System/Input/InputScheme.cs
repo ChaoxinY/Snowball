@@ -63,7 +63,6 @@ public class InputScheme : ScriptableObject
 
     public ControllerInformation.ControllerType ControllerType
     {
-
         get { return controllerInformation.controller; }
     }
 

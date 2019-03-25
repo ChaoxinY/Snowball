@@ -2,11 +2,11 @@
 
 public class UINavigatorInputHandlerDefaultState : InputHandlerState
 {
-    private UIPageHolder uIPageHolder;
+    private UIPanelHolder uiPanelHolder;
 
     public UINavigatorInputHandlerDefaultState(InputHandlerUpdater inputHandlerUpdater)
     {
-        uIPageHolder = GameObject.Find("UICanvas").GetComponent<UIPageHolder>();
+        uiPanelHolder = GameObject.Find("StartingScreenUICanvas").GetComponent<UIPanelHolder>();
         InputHandlerUpdater = inputHandlerUpdater;
     }
 
@@ -20,11 +20,11 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
         {
             //Close current panel
             bool returnToStartPage = true;
-            foreach (UIPage uiPage in uIPageHolder.initializedUIPages)
+            foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
             {
-                if (uiPage.isActive)
+                if (uIPanel.gameObject.activeInHierarchy)
                 {
-                    foreach (IFocusUIElement focusElement in uiPage.FocusedUIElements)
+                    foreach (IFocusUIElement focusElement in uIPanel.FocusUIElements)
                     {
                         bool focused = focusElement.IsThisElementInFocus();
                         if (focused)
@@ -37,14 +37,14 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
             }
             if (returnToStartPage)
             {
-                foreach (UIPage uiPage in uIPageHolder.initializedUIPages)
+                foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
                 {
-                    if (uiPage.GetComponent<IFocusUIElement>() == null)
+                    if (uIPanel.GetComponent<IFocusUIElement>() == null)
                     {
-                        uiPage.gameObject.SetActive(false);
+						uIPanel.gameObject.SetActive(false);
                     }
                 }
-                UIToolMethods.OpenUIPanel(uIPageHolder.startPage.canvasTransform, uIPageHolder.startPage.gameObject.name);
+                UIToolMethods.OpenUIPanel(uiPanelHolder.canvasTransform, uiPanelHolder.StartPanel.gameObject.name);
             }
         }
         // Change to In game state
@@ -56,11 +56,11 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
 
 public class UINavigatorInputHandlerInGameState : InputHandlerState
 {
-    private UIPageHolder uIPageHolder;
+    private UIPanelHolder uIPageHolder;
 
     public UINavigatorInputHandlerInGameState(InputHandlerUpdater inputHandlerUpdater)
     {
-        uIPageHolder = GameObject.Find("UICanvas").GetComponent<UIPageHolder>();
+        uIPageHolder = GameObject.Find("UICanvas").GetComponent<UIPanelHolder>();
         InputHandlerUpdater = inputHandlerUpdater;
     }
 

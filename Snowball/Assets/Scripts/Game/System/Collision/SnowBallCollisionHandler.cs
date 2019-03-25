@@ -3,18 +3,18 @@
 //Component
 //EventSender
 
-public class SnowBallCollisionHandler : ICollideAble,IEventPublisher
+public class SnowBallCollisionHandler : ICollideAble, IEventPublisher
 {
 	private GameObject gameObjectAttachedTo;
-	private EventSubject subject;
+	private ISubject subject;
 
 	public event System.EventHandler<GameObjectEventArgs> CollidedWithGoal;
 
-	public SnowBallCollisionHandler(GameObject gameObjectAttachedTo, EventSubject subjectToSubscribe)
+	public SnowBallCollisionHandler(GameObject gameObjectAttachedTo, ISubject subjectToSubscribe)
 	{
 		this.gameObjectAttachedTo = gameObjectAttachedTo;
 		subject = subjectToSubscribe;
-		subject.SubscribeEventPublisher(this);
+		subject.Subscribe(this);
 	}
 
 	public void ReactToCollision(Collision collision)
@@ -34,5 +34,10 @@ public class SnowBallCollisionHandler : ICollideAble,IEventPublisher
 			Debug.Log("Null");
 		}
 		CollidedWithGoal(this, new GameObjectEventArgs(gameObjectAttachedTo));
+	}
+
+	public void UnSubscribeFromSubject()
+	{
+		subject.UnSubscribe(this);
 	}
 }

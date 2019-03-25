@@ -9,11 +9,15 @@ public class Player : MonoBehaviour, IInputSchemeHolder,IMovementDataHolder
     private List<ICollideAble> collideAbles = new List<ICollideAble>();
     private InputScheme inputScheme;
     private MovementDataHolder movementDataHolder;
+	private IFactory inputStateFactory;
+	private ICollideAble playerCollisionHandler;
+	private InputHandlerUpdater inputHandlerUpdater;
+	private PowerUpInventory powerUpInventory;
 
-    public IFactory InputStateFactory { get { return InputStateFactory; } internal set { InputStateFactory = value; } }
-    public ICollideAble PlayerCollisionHandler { get { return PlayerCollisionHandler; } internal set { PlayerCollisionHandler = value; } }
-	public InputHandlerUpdater InputHandlerUpdater { get { return InputHandlerUpdater; } internal set { InputHandlerUpdater = value; } }
-	public PowerUpInventory PowerUpInventory { get { return PowerUpInventory; } internal set { PowerUpInventory = value; } }
+	public IFactory InputStateFactory { get { return inputStateFactory; } private set { inputStateFactory = value; } }
+    public ICollideAble PlayerCollisionHandler { get { return playerCollisionHandler; } private set { playerCollisionHandler = value; } }
+	public InputHandlerUpdater InputHandlerUpdater { get { return inputHandlerUpdater; } private set { inputHandlerUpdater = value; } }
+	public PowerUpInventory PowerUpInventory { get { return powerUpInventory; } private set { powerUpInventory = value; } }
 
     //Read scriptableobject for different configurations
     private void Start()

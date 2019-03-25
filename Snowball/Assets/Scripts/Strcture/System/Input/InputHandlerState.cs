@@ -6,7 +6,8 @@ public abstract class InputHandlerState
     protected List<ICommand> fixedUpdateCommands = new List<ICommand>();
     public List<ICommand> FixedUpdateCommands { get { return fixedUpdateCommands; } }
 	public abstract void HandleInput();
-	protected InputHandlerUpdater InputHandlerUpdater { get { return InputHandlerUpdater; } set { InputHandlerUpdater = value; } }
+	private InputHandlerUpdater inputHandlerUpdater;
+	protected InputHandlerUpdater InputHandlerUpdater { get { return inputHandlerUpdater; } set { inputHandlerUpdater = value; } }
 	public void ClearUnExecutedCommandsList() { FixedUpdateCommands.Clear(); }
  }
 

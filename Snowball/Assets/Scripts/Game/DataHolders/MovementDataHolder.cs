@@ -7,5 +7,6 @@ public class MovementDataHolder : ScriptableObject
 	private float movementSpeed, rotationSpeed;
 	public float MovementSpeed { get { return movementSpeed; } }
 	public float RotationSpeed { get { return rotationSpeed; } }
-	public Vector3 LastMovementInput { get { return LastMovementInput; } set { LastMovementInput = value; } }
+	private Vector3 lastMovementInput;
+	public Vector3 LastMovementInput { get { return lastMovementInput; } set { lastMovementInput = value; } }
 }
