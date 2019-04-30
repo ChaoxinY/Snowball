@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class UINavigator : MonoBehaviour
 {
 	private List<IUpdater> updaters = new List<IUpdater>();
 	private EventsystemCurrentGameObjectRefresher objectRefresher;
-	private IFactory inputStateFactory;
-	private InputHandlerUpdater inputHandlerUpdater;
-	public IFactory InputStateFactory { get { return inputStateFactory; } private set { inputStateFactory = value; } }
-	public InputHandlerUpdater InputHandlerUpdater { get { return inputHandlerUpdater; } internal set { inputHandlerUpdater = value; } }
+
+	public IFactory InputStateFactory { get; private set; }
+	public InputHandlerUpdater InputHandlerUpdater { get; private set; }
 
 	void Start()
 	{
@@ -36,13 +36,14 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 	public EventsystemCurrentGameObjectRefresher(EventSystem eventSystem)
 	{
 		this.eventSystem = eventSystem;
-		uIPanelHolder = GameObject.Find("UICanvas").GetComponent<UIPanelHolder>();
+		uIPanelHolder = GameObject.Find("MainCanvas").GetComponent<UIPanelHolder>();
 		GameObject selectableUIElement = SearchForActiveUIElement(uIPanelHolder.initializedUIPanels);
 		lastSelectedGameObject.Push(selectableUIElement);
 	}
 
 	public void UpdateComponent()
 	{
+		Debug.Log(lastSelectedGameObject.Peek());
 		if (eventSystem.currentSelectedGameObject == null)
 		{
 			//Incase reference is destroyed or missing 
@@ -56,7 +57,6 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 		//this or == false
 		else if (!eventSystem.currentSelectedGameObject.activeInHierarchy)
 		{
-			Debug.Log("Called");
 			GameObject newCurrentGameObject = SearchForActiveUIElement(uIPanelHolder.initializedUIPanels);
 			lastSelectedGameObject.Push(newCurrentGameObject);
 			eventSystem.SetSelectedGameObject(lastSelectedGameObject.Peek());
@@ -76,11 +76,12 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 		{
 			if (uIPanel.gameObject.activeInHierarchy && uIPanel.SelectableUIElements.Count != 0)
 			{
-				foreach (GameObject selectablesUIElement in uIPanel.SelectableUIElements)
+				foreach (Selectable selectablesUIElement in uIPanel.SelectableUIElements)
 				{
-					if (selectablesUIElement.activeInHierarchy)
+					GameObject selectableGameObject = selectablesUIElement.gameObject;
+					if (selectableGameObject.activeInHierarchy)
 					{
-						selectableUIElement = selectablesUIElement;
+						selectableUIElement = selectableGameObject;
 					}
 				}
 			}

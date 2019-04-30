@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 {
@@ -33,8 +34,8 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 
     //preset for different paneltype 
     private void Start()
-    {   
-       panels = uIPanel.SelectableUIElements;
+    {
+		panels = uIPanel.SelectableUIElements.Select(element => element.gameObject).ToList();
         uIPanel.FocusUIElements.Add(this);
         for (int i = 1; i < panels.Count; i++)
         {
@@ -66,6 +67,7 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
         return focused;
     }
 }
+
 public class InitializePanelAdapter
 {
     private List<PlayerInitializePanel> playerInitializePanels = new List<PlayerInitializePanel>();

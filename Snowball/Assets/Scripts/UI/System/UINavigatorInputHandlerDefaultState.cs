@@ -6,7 +6,7 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
 
     public UINavigatorInputHandlerDefaultState(InputHandlerUpdater inputHandlerUpdater)
     {
-        uiPanelHolder = GameObject.Find("StartingScreenUICanvas").GetComponent<UIPanelHolder>();
+        uiPanelHolder = GameObject.Find("MainCanvas").GetComponent<UIPanelHolder>();
         InputHandlerUpdater = inputHandlerUpdater;
     }
 

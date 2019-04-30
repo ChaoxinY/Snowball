@@ -5,17 +5,18 @@ using System.Collections.Generic;
 public class UIPanel : MonoBehaviour
 {
 	[SerializeField]
-	private UIPanelHolder UIPanelHolder;
-	private List<IFocusUIElement> focusUIElements = new List<IFocusUIElement>();
-	private List<GameObject> selectableUIElements = new List<GameObject>();
+	private ISubject uIPanelHolder;
 
-	public List<GameObject> SelectableUIElements { get { return selectableUIElements; } private set { selectableUIElements = value; } }
-	public List<IFocusUIElement> FocusUIElements { get { return focusUIElements; } private set { focusUIElements = value; } }
+	public List<Selectable> selectables = new List<Selectable>();
+	public List<Selectable> SelectableUIElements { get; private set; } = new List<Selectable>();
+	public List<IFocusUIElement> FocusUIElements { get; private set; } = new List<IFocusUIElement>();
 
 	private void Start()
-	{
-		SystemToolMethods.RecursionSearch(gameObject.transform, typeof(Selectable), SelectableUIElements);
-		UIPanelHolder.Subscribe(this);
+	{	
+		uIPanelHolder = GameObject.Find("MainCanvas").GetComponent<ISubject>();
+		SystemToolMethods.TransformRecursionSearch(gameObject.transform, SelectableUIElements);
+		uIPanelHolder.Subscribe(this);
+		selectables = SelectableUIElements;
 	}
 	
 }

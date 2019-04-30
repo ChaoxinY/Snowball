@@ -6,9 +6,7 @@ public class UIPanelHolder : MonoBehaviour, ISubject
 	public Transform canvasTransform;
 	[HideInInspector]
 	public List<UIPanel> initializedUIPanels = new List<UIPanel>();
-
-	private UIPanel startPanel;
-	public UIPanel StartPanel { get { return startPanel; } private set { startPanel = value; } }
+	public UIPanel StartPanel { get; private set; }
 
 	private void Start()
 	{

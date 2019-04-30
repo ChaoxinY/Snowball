@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InputStateFactory : IFactory
 {
+	//Replace this with List of types
 	public List<string> requirementPointerNames = new List<string> { "InputHandlerUpdater" };
 
 	public System.Object CreateProduct(int productType, System.Object referenceObject, GameObject referenceObjectGameObject = null)

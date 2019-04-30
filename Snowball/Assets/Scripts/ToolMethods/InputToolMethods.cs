@@ -6,7 +6,6 @@ public static class InputToolMethod
     public static string lastInputString =null;
 
     public static bool IsInputRepeated() {
-        Debug.Log("Called");
         bool isRepeated = false;
         if (ReturnInputString() == null)
         {

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class CoroutineToolMethods : MonoBehaviour
 {
-    public  IEnumerator LoadScene(string sceneName)
+	public  IEnumerator LoadScene(string sceneName)
     {
         Debug.Log("Called "+ sceneName);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
