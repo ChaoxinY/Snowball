@@ -15,7 +15,7 @@ public class UIPanelHolder : MonoBehaviour, ISubject
 
 	public void Subscribe<T>(T item)
 	{
-		if (item is UIPanel uIPanel)
+		if (item is UIPanel uIPanel && !initializedUIPanels.Contains(uIPanel))
 		{
 			initializedUIPanels.Add(uIPanel);
 			if (StartPanel == null)
@@ -31,5 +31,6 @@ public class UIPanelHolder : MonoBehaviour, ISubject
 		{
 			initializedUIPanels.Remove(uIPanel);
 		}
+		//Remove reference to the selectable elements aswell
 	}
 }

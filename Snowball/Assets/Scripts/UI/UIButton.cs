@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class UIButton : MonoBehaviour
 {
 	#region Variables
-
-	public GameObject panelToOpen, panelToClose;
+	public List<GameObject> panelsToOpen, panelsToClose;
 	public string sceneToOpen;
 	public enum ButtonFunction
 	{
@@ -47,10 +46,22 @@ public class UIButton : MonoBehaviour
 		switch (buttonFunction)
 		{
 			case ButtonFunction.ClosePanel:
-				button.onClick.AddListener(delegate { UIToolMethods.DisableGameObject(panelToClose.name); });
+				button.onClick.AddListener(delegate
+				{
+					foreach (GameObject panelToClose in panelsToClose)
+					{
+						UIToolMethods.DisableGameObject(panelToClose.name);
+					}
+				});
 				break;
 			case ButtonFunction.OpenPanel:
-				button.onClick.AddListener(delegate { UIToolMethods.OpenUIPanel(mainCanvasTransform, panelToOpen.name); });
+				button.onClick.AddListener(delegate 
+				{
+				foreach (GameObject panelToOpen in panelsToOpen)
+				{
+					UIToolMethods.OpenUIPanel(mainCanvasTransform, panelToOpen.name);
+				}
+				});
 				break;
 			case ButtonFunction.LoadScene:
 				button.onClick.AddListener(delegate { StartCoroutine(coroutineToolMethods.LoadScene(sceneToOpen)); });
@@ -61,7 +72,7 @@ public class UIButton : MonoBehaviour
 			case ButtonFunction.OpenUIPage:
 				button.onClick.AddListener(delegate
 				{
-					UIToolMethods.OpenUIPanel(mainCanvasTransform, panelToOpen.name);
+					UIToolMethods.OpenUIPanel(mainCanvasTransform, panelsToOpen[0].name);
 					UIToolMethods.DisableGameObject(gameObject.name);
 				});
 				break;

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 {
     private bool focused;
 	[SerializeField]
     private UIPanel uIPanel;
-    private List<GameObject> panels;
+    private List<GameObject> panels = new List<GameObject>();
     private PanelType currentPanelType;
     private PanelType nextPanelType;
 
@@ -35,7 +34,10 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
     //preset for different paneltype 
     private void Start()
     {
-		panels = uIPanel.SelectableUIElements.Select(element => element.gameObject).ToList();
+		for (int i = 0; i < gameObject.transform.childCount; i++)
+		{
+			panels.Add(gameObject.transform.GetChild(i).gameObject);
+		} 
         uIPanel.FocusUIElements.Add(this);
         for (int i = 1; i < panels.Count; i++)
         {
@@ -76,33 +78,34 @@ public class InitializePanelAdapter
     public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformation)
     {
         PlayerInitializePanel[] panels = gameObject.GetComponentsInChildren<PlayerInitializePanel>();
+
         for (int i = 0; i < panels.Length; i++)
         {
             playerInitializePanels.Add(panels[i]);
         }
-        this.controllerInformations = controllerInformation;
+		Debug.Log(playerInitializePanels.Count);
+		this.controllerInformations = controllerInformation;
     }
 
     public void RefreshPanel()
     {
-
         int i = 0;
-        foreach (ControllerInformation c in controllerInformations)
-        {
-            switch (c.controller)
-            {
-                case ControllerInformation.ControllerType.None:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.None;
-                    break;
-                case ControllerInformation.ControllerType.Controller:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.ControllerCharacterSelection;
-                    break;
-                case ControllerInformation.ControllerType.Keyboard:
-                    playerInitializePanels[i].NextPanelType = PlayerInitializePanel.PanelType.KeyBoardCharacterSelection;
-                    break;
-            }
-            i++;
-        }
+		foreach (PlayerInitializePanel panel in playerInitializePanels)
+		{
+			switch (controllerInformations[i].controller)
+			{
+				case ControllerInformation.ControllerType.None:
+					panel.NextPanelType = PlayerInitializePanel.PanelType.None;
+					break;
+				case ControllerInformation.ControllerType.Controller:
+					panel.NextPanelType = PlayerInitializePanel.PanelType.ControllerCharacterSelection;
+					break;
+				case ControllerInformation.ControllerType.Keyboard:
+					panel.NextPanelType = PlayerInitializePanel.PanelType.KeyBoardCharacterSelection;
+					break;
+			}
+			i++;
+		}
     }
 }
 

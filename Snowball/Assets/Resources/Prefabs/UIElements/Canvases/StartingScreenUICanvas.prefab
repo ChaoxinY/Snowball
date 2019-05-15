@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectables: []
 --- !u!1001 &5701570926010796110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,12 +322,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
         type: 3}
+      propertyPath: panelsToOpen.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
+        type: 3}
+      propertyPath: panelsToClose.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
+        type: 3}
       propertyPath: buttonFunctions.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
         type: 3}
-      propertyPath: panelToClose
+      propertyPath: panelsToClose.Array.data[0]
       value: 
       objectReference: {fileID: 5701570927405468179}
     - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
@@ -482,10 +491,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8661484
       objectReference: {fileID: 0}
-    - target: {fileID: 1827638733545102, guid: 9165080c917f51f4cb3c2efca631f5a7, type: 3}
-      propertyPath: m_Name
-      value: Exit Game
-      objectReference: {fileID: 0}
     - target: {fileID: 3745410911266350846, guid: 9165080c917f51f4cb3c2efca631f5a7,
         type: 3}
       propertyPath: buttonFunctions.Array.size
@@ -495,6 +500,10 @@ PrefabInstance:
         type: 3}
       propertyPath: buttonFunctions.Array.data[0]
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827638733545102, guid: 9165080c917f51f4cb3c2efca631f5a7, type: 3}
+      propertyPath: m_Name
+      value: Exit Game
       objectReference: {fileID: 0}
     - target: {fileID: 114718043096808632, guid: 9165080c917f51f4cb3c2efca631f5a7,
         type: 3}

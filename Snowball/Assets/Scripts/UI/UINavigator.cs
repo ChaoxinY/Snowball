@@ -43,7 +43,6 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 
 	public void UpdateComponent()
 	{
-		Debug.Log(lastSelectedGameObject.Peek());
 		if (eventSystem.currentSelectedGameObject == null)
 		{
 			//Incase reference is destroyed or missing 
@@ -67,6 +66,7 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 		{
 			lastSelectedGameObject.Push(eventSystem.currentSelectedGameObject);
 		}
+		Debug.Log(lastSelectedGameObject.Peek());
 	}
 
 	private GameObject SearchForActiveUIElement(List<UIPanel> uIPanels)

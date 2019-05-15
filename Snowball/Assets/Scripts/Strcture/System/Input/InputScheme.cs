@@ -33,7 +33,6 @@ public class ControllerInformation
     }
 }
 
-//Switching between multiple tabs can be nauseating hence putting correlated classes together.
 [CreateAssetMenu(fileName = "NewInputBlock", menuName = "Dataholders/InputBlock")]
 public class InputScheme : ScriptableObject
 {
@@ -89,19 +88,20 @@ public class InputSchemeAssigner : IUpdater
 
     public void UpdateComponent()
     {
-        if (InputToolMethod.ReturnInputString() != null)
+		if (InputToolMethod.lastInputString!= null)
         {
             string inputString = InputToolMethod.ReturnInputString();
             bool keyBoardInput = inputString.Contains("Submit");
             bool controllerInput = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
             if (keyBoardInput)
-            {
+            {	
                 AddKeyboardControllerInformation();
             }
             else if (controllerInput)
             {
                 AddControllerInformation(inputString);
             }
+			
         }
     }
 
@@ -114,46 +114,33 @@ public class InputSchemeAssigner : IUpdater
         {
             //Controllers should be unique and not added through one controller
             //and controller order isnt any of the previous
-            bool controlleOrderRepeated = false;
-            for (int j = 0; j < connectedControllers.Count; j++)
-            {
-                if (controllerOrder == connectedControllers[j].controllerOrder)
-                {
-                    controlleOrderRepeated = true;
-                }
-            }
-            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None && !controlleOrderRepeated)
-            {
-                connectedControllers[i] = new ControllerInformation();
-                connectedControllers[i].controllerOrder = controllerOrder;
-                connectedControllers[i].controller = ControllerInformation.ControllerType.Controller;
-                initializePanelAdapter.RefreshPanel();
-                break;
-            }
-        }
+			if (connectedControllers[i].controller != ControllerInformation.ControllerType.None ||controllerOrder == connectedControllers[i].controllerOrder)
+			{
+				continue;
+			}
+			connectedControllers[i] = new ControllerInformation();
+			connectedControllers[i].controllerOrder = controllerOrder;
+			connectedControllers[i].controller = ControllerInformation.ControllerType.Controller;
+			//Assign the controllerinformation and update the panels to display the information.
+			initializePanelAdapter.RefreshPanel();
+			break;
+		}
     }
 
     private void AddKeyboardControllerInformation()
     {
         for (int i = 0; i < connectedControllers.Count; i++)
         {
-            bool controlleOrderRepeated = false;
-            for (int j = 0; j < connectedControllers.Count; j++)
-            {
-                if (connectedControllers[j].controller == ControllerInformation.ControllerType.Keyboard)
-                {
-                    controlleOrderRepeated = true;
-                }
-            }
-            if (connectedControllers[i].controller == ControllerInformation.ControllerType.None && !controlleOrderRepeated)
-            {
-                connectedControllers[i] = new ControllerInformation();
-                connectedControllers[i].controller = ControllerInformation.ControllerType.Keyboard;
-                initializePanelAdapter.RefreshPanel();
-                break;
-            }
-        }
-    }
+			if (connectedControllers[i].controller != ControllerInformation.ControllerType.None)
+			{
+				continue;
+			}
+			connectedControllers[i] = new ControllerInformation();
+			connectedControllers[i].controller = ControllerInformation.ControllerType.Keyboard;
+			initializePanelAdapter.RefreshPanel();
+			break;
+		}
+	}
 }
 
 public class InputSchemeRevoker : IUpdater

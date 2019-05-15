@@ -38,15 +38,15 @@ public static class InputToolMethod
             if (Input.GetButton(name))
             {
                 buttonString = name;
-                break;
+				return buttonString;				
             }
-            else if (Input.GetAxis(name) != 0)
-            {
-                buttonString = name;
-                break;
-            }
+			else if (Input.GetAxis(name) != 0)
+			{
+				buttonString = name;
+				return buttonString;
+			}
 
-        }
+		}
         return buttonString;
     }
 

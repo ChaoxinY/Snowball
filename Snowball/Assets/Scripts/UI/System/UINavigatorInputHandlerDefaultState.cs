@@ -19,7 +19,7 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
         if (!InputToolMethod.IsInputRepeated() && Input.GetAxis("Cancel") != 0)
         {
             //Close current panel
-            bool returnToStartPage = true;
+            bool returnToStartPanel = true;
             foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
             {
                 if (uIPanel.gameObject.activeInHierarchy)
@@ -29,13 +29,13 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
                         bool focused = focusElement.IsThisElementInFocus();
                         if (focused)
                         {
-                            returnToStartPage = false;
+                            returnToStartPanel = false;
                             break;
                         }
                     }
                 }
             }
-            if (returnToStartPage)
+            if (returnToStartPanel)
             {
                 foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
                 {
