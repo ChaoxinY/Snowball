@@ -89,19 +89,18 @@ public class InputSchemeAssigner : IUpdater
     public void UpdateComponent()
     {
 		if (InputToolMethod.lastInputString!= null)
-        {
-            string inputString = InputToolMethod.ReturnInputString();
-            bool keyBoardInput = inputString.Contains("Submit");
+		{ 
+			string inputString = InputToolMethod.ReturnInputString();
+			bool keyBoardInput = inputString.Contains("Submit");
             bool controllerInput = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
             if (keyBoardInput)
-            {	
+            {			
                 AddKeyboardControllerInformation();
             }
             else if (controllerInput)
             {
                 AddControllerInformation(inputString);
-            }
-			
+            }		
         }
     }
 
@@ -109,12 +108,20 @@ public class InputSchemeAssigner : IUpdater
     private void AddControllerInformation(string inputString)
     {
         string controllerOrder = InputToolMethod.ReturnJoyStickOrder(inputString);
-        //check controllers thats already been added to see if this is a duplicate.
+		//check controllers thats already been added to see if this is a duplicate.
+		foreach (ControllerInformation controllerInformation in connectedControllers)
+		{
+			if (controllerInformation.controllerOrder == controllerOrder)
+			{
+				return;
+			}
+		}
+
         for (int i = 0; i < connectedControllers.Count; i++)
         {
             //Controllers should be unique and not added through one controller
             //and controller order isnt any of the previous
-			if (connectedControllers[i].controller != ControllerInformation.ControllerType.None ||controllerOrder == connectedControllers[i].controllerOrder)
+			if (connectedControllers[i].controller != ControllerInformation.ControllerType.None)
 			{
 				continue;
 			}
@@ -129,7 +136,15 @@ public class InputSchemeAssigner : IUpdater
 
     private void AddKeyboardControllerInformation()
     {
-        for (int i = 0; i < connectedControllers.Count; i++)
+		//if a keyboard speler is already assigned
+		foreach (ControllerInformation controllerInformation in connectedControllers)
+		{
+			if (controllerInformation.controller == ControllerInformation.ControllerType.Keyboard)
+			{
+				return;
+			}
+		}
+		for (int i = 0; i < connectedControllers.Count; i++)
         {
 			if (connectedControllers[i].controller != ControllerInformation.ControllerType.None)
 			{

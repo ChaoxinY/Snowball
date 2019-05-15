@@ -4,7 +4,6 @@ using UnityEngine;
 public class UIPanelHolder : MonoBehaviour, ISubject
 {
 	public Transform canvasTransform;
-	[HideInInspector]
 	public List<UIPanel> initializedUIPanels = new List<UIPanel>();
 	public UIPanel StartPanel { get; private set; }
 

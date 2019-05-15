@@ -18,7 +18,7 @@ public static class UIToolMethods
             AddUIPanel(canvasTransform, panelName, panelName);
         }
     }
-
+	 
     public static void DisableGameObject(string name)
     {
         GameObject.Find(name).SetActive(false);

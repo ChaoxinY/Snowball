@@ -49,8 +49,12 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 
     public void RefreshPanels()
     {
-        if (NextPanelType == currentPanelType)
-        {
+		if (NextPanelType == currentPanelType)
+		{
+			if (!panels[(int)currentPanelType].activeInHierarchy)
+			{
+				panels[(int)currentPanelType].SetActive(true);
+			}
             return;
         }
         focused = true;
@@ -59,12 +63,11 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
         currentPanelType = nextPanelType;
         if (currentPanelType == PanelType.None)
         {
-            Debug.Log((int)currentPanelType);
             focused = false;
         }
     }
 
-    public bool IsThisElementInFocus()
+	public bool IsThisElementInFocus()
     {
         return focused;
     }
@@ -75,16 +78,15 @@ public class InitializePanelAdapter
     private List<PlayerInitializePanel> playerInitializePanels = new List<PlayerInitializePanel>();
     private List<ControllerInformation> controllerInformations = new List<ControllerInformation>();
 
-    public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformation)
+    public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformations)
     {
         PlayerInitializePanel[] panels = gameObject.GetComponentsInChildren<PlayerInitializePanel>();
-
+	
         for (int i = 0; i < panels.Length; i++)
         {
             playerInitializePanels.Add(panels[i]);
         }
-		Debug.Log(playerInitializePanels.Count);
-		this.controllerInformations = controllerInformation;
+		this.controllerInformations = controllerInformations;
     }
 
     public void RefreshPanel()

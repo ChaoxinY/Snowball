@@ -66,7 +66,6 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 		{
 			lastSelectedGameObject.Push(eventSystem.currentSelectedGameObject);
 		}
-		Debug.Log(lastSelectedGameObject.Peek());
 	}
 
 	private GameObject SearchForActiveUIElement(List<UIPanel> uIPanels)

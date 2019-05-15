@@ -18,7 +18,6 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
         //The page stores all focusable ui elements and the currently focused element.
         if (!InputToolMethod.IsInputRepeated() && Input.GetAxis("Cancel") != 0)
         {
-            //Close current panel
             bool returnToStartPanel = true;
             foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
             {
@@ -37,14 +36,16 @@ public class UINavigatorInputHandlerDefaultState : InputHandlerState
             }
             if (returnToStartPanel)
             {
-                foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
-                {
-                    if (uIPanel.GetComponent<IFocusUIElement>() == null)
-                    {
+				//if there are no elements being focused close all panels and return to start
+				foreach (UIPanel uIPanel in uiPanelHolder.initializedUIPanels)
+				{
+					if (uIPanel.GetComponent<IFocusUIElement>() == null)
+					{
 						uIPanel.gameObject.SetActive(false);
-                    }
-                }
-                UIToolMethods.OpenUIPanel(uiPanelHolder.canvasTransform, uiPanelHolder.StartPanel.gameObject.name);
+						Debug.Log(uIPanel.gameObject.name);
+					}
+				}
+				UIToolMethods.OpenUIPanel(uiPanelHolder.canvasTransform, uiPanelHolder.StartPanel.gameObject.name);
             }
         }
         // Change to In game state
