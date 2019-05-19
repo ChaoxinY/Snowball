@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 1803845351178196545}
   - component: {fileID: 7099320953131287929}
   - component: {fileID: 2071079230}
-  - component: {fileID: 3728449239178084507}
   m_Layer: 0
   m_Name: Assign
   m_TagString: Untagged
@@ -237,18 +236,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &3728449239178084507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071079228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &48138386741108302
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +249,6 @@ GameObject:
   - component: {fileID: 7846802895176469041}
   - component: {fileID: 5649374310127501778}
   - component: {fileID: 1869349540265792269}
-  - component: {fileID: 6262567558069082013}
   m_Layer: 0
   m_Name: Assign
   m_TagString: Untagged
@@ -371,18 +357,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &6262567558069082013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48138386741108302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &104141390740160596
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +370,6 @@ GameObject:
   - component: {fileID: 5304436648471500175}
   - component: {fileID: 4502472145343391454}
   - component: {fileID: 206350351886548532}
-  - component: {fileID: 6780011812240638872}
   m_Layer: 0
   m_Name: KeyboardInterface
   m_TagString: Untagged
@@ -506,18 +479,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &6780011812240638872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104141390740160596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &228848874185114830
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +895,6 @@ GameObject:
   - component: {fileID: 4362743592347342503}
   - component: {fileID: 7822818891320575885}
   - component: {fileID: 5127943749080049479}
-  - component: {fileID: 6162637904691326743}
   m_Layer: 0
   m_Name: ControllerInterface
   m_TagString: Untagged
@@ -1045,18 +1005,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &6162637904691326743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3402248720682023189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3550497466111501673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1227,6 @@ GameObject:
   - component: {fileID: 6980356953513091454}
   - component: {fileID: 7895945653225442363}
   - component: {fileID: 5623108318746445430}
-  - component: {fileID: 4091213933575990499}
   m_Layer: 0
   m_Name: ControllerInterface
   m_TagString: Untagged
@@ -1390,18 +1337,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &4091213933575990499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5385225244175260171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5420810213589451629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1350,6 @@ GameObject:
   - component: {fileID: 8138200897955782842}
   - component: {fileID: 5595283742812115842}
   - component: {fileID: 3946425525243764169}
-  - component: {fileID: 5940056165018337744}
   m_Layer: 0
   m_Name: Assign
   m_TagString: Untagged
@@ -1524,18 +1458,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &5940056165018337744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5420810213589451629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6381446016890330787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,7 +1755,6 @@ GameObject:
   - component: {fileID: 4572062526578201751}
   - component: {fileID: 4920092558946666448}
   - component: {fileID: 8110896819629041157}
-  - component: {fileID: 7357708220435299888}
   m_Layer: 0
   m_Name: KeyboardInterface
   m_TagString: Untagged
@@ -1943,18 +1864,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &7357708220435299888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7145932184740660107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7170989596478190924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,7 +2069,6 @@ GameObject:
   - component: {fileID: 3591349496414677835}
   - component: {fileID: 5407469190084623547}
   - component: {fileID: 1857974882731488078}
-  - component: {fileID: 4923549929732699014}
   m_Layer: 0
   m_Name: ControllerInterface
   m_TagString: Untagged
@@ -2271,18 +2179,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &4923549929732699014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775876304445906247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7807074720824526686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2192,6 @@ GameObject:
   - component: {fileID: 6616660744439049543}
   - component: {fileID: 13775095621915751}
   - component: {fileID: 2492044943287836972}
-  - component: {fileID: 3408846286933387137}
   m_Layer: 0
   m_Name: KeyboardInterface
   m_TagString: Untagged
@@ -2406,18 +2301,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &3408846286933387137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7807074720824526686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7825400112575393346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,7 +2314,6 @@ GameObject:
   - component: {fileID: 1420535850780312694}
   - component: {fileID: 4481733190645100765}
   - component: {fileID: 6009886195074817481}
-  - component: {fileID: 4174556513914892976}
   m_Layer: 0
   m_Name: Assign
   m_TagString: Untagged
@@ -2540,18 +2422,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &4174556513914892976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7825400112575393346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7985884501813817633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2486,6 @@ GameObject:
   - component: {fileID: 59383479535717607}
   - component: {fileID: 5223762934845838041}
   - component: {fileID: 9067111876209809055}
-  - component: {fileID: 302042543664629778}
   m_Layer: 0
   m_Name: ControllerInterface
   m_TagString: Untagged
@@ -2727,18 +2596,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &302042543664629778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8215326712521991298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fdead6d5c292440989182dec408192, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8467741196116072286
 GameObject:
   m_ObjectHideFlags: 0
