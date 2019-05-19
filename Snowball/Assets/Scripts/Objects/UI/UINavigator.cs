@@ -34,41 +34,55 @@ public class UINavigator : MonoBehaviour
 public class EventsystemCurrentGameObjectRefresher : IUpdater
 {
 	private EventSystem eventSystem;
-	private Stack<GameObject> lastSelectedGameObject = new Stack<GameObject>();
+	private Stack<GameObject> lastSelectedGameObjects = new Stack<GameObject>();
 	private UIPanelHolder uIPanelHolder;
 
 	public EventsystemCurrentGameObjectRefresher(EventSystem eventSystem)
 	{
 		this.eventSystem = eventSystem;
 		uIPanelHolder = GameObject.Find("MainCanvas").GetComponent<UIPanelHolder>();
-		GameObject selectableUIElement = SearchForActiveUIElement(uIPanelHolder.initializedUIPanels);
-		lastSelectedGameObject.Push(selectableUIElement);
+		AddselectableUIElement(lastSelectedGameObjects);
 	}
 
 	public void UpdateComponent()
 	{
 		if (eventSystem.currentSelectedGameObject == null)
 		{
+			//The stack is empty try to find an activeElement
+			if (lastSelectedGameObjects.Count == 0)
+			{
+				AddselectableUIElement(lastSelectedGameObjects);
+				return;
+			}
 			//Incase reference is destroyed or missing 
-			if (lastSelectedGameObject.Peek() == null)
+			if (lastSelectedGameObjects.Peek() == null)
 			{
 				//get rid of the null one
-				lastSelectedGameObject.Pop();
+				lastSelectedGameObjects.Pop();
 			}
-			eventSystem.SetSelectedGameObject(lastSelectedGameObject.Peek());
+			eventSystem.SetSelectedGameObject(lastSelectedGameObjects.Peek());
 		}
 		//this or == false
 		else if (!eventSystem.currentSelectedGameObject.activeInHierarchy)
 		{
 			GameObject newCurrentGameObject = SearchForActiveUIElement(uIPanelHolder.initializedUIPanels);
-			lastSelectedGameObject.Push(newCurrentGameObject);
-			eventSystem.SetSelectedGameObject(lastSelectedGameObject.Peek());
+			lastSelectedGameObjects.Push(newCurrentGameObject);
+			eventSystem.SetSelectedGameObject(lastSelectedGameObjects.Peek());
 		}
 		//If current isnt the same as the first in stack and currently selected object isnt null.
 		//Add this new reference
-		if (eventSystem.currentSelectedGameObject != lastSelectedGameObject.Peek() && eventSystem.currentSelectedGameObject != null)
+		if (eventSystem.currentSelectedGameObject != lastSelectedGameObjects.Peek() && eventSystem.currentSelectedGameObject != null)
 		{
-			lastSelectedGameObject.Push(eventSystem.currentSelectedGameObject);
+			lastSelectedGameObjects.Push(eventSystem.currentSelectedGameObject);
+		}
+	}
+
+	private void AddselectableUIElement(Stack<GameObject> stackToAdd)
+	{
+		GameObject selectableUIElement = SearchForActiveUIElement(uIPanelHolder.initializedUIPanels);
+		if (selectableUIElement!= null)
+		{
+			stackToAdd.Push(selectableUIElement);
 		}
 	}
 

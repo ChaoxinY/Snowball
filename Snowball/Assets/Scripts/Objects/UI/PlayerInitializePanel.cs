@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
-{
+public class PlayerInitializePanel : MonoBehaviour
+{ 
     private bool focused;
-	[SerializeField]
-    private UIPanel uIPanel;
     private List<GameObject> panels = new List<GameObject>();
     private PanelType currentPanelType;
     private PanelType nextPanelType;
@@ -38,7 +36,6 @@ public class PlayerInitializePanel : MonoBehaviour, IFocusUIElement
 		{
 			panels.Add(gameObject.transform.GetChild(i).gameObject);
 		} 
-        uIPanel.FocusUIElements.Add(this);
         for (int i = 1; i < panels.Count; i++)
         {
             panels[i].SetActive(false);
