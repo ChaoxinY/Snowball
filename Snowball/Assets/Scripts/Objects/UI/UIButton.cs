@@ -64,7 +64,7 @@ public class UIButton : MonoBehaviour
 				});
 				break;
 			case ButtonFunction.LoadScene:
-				button.onClick.AddListener(delegate { StartCoroutine(coroutineToolMethods.LoadScene(sceneToOpen)); });
+				button.onClick.AddListener(delegate { StartCoroutine(coroutineToolMethods.AsyncLoadScene(sceneToOpen)); });
 				break;
 			case ButtonFunction.ExitGame:
 				button.onClick.AddListener(delegate { UIToolMethods.ExitGame(); });

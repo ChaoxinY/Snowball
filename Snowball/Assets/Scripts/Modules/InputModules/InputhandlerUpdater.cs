@@ -3,17 +3,17 @@
 public class InputHandlerUpdater : IUpdater, IFixedUpdater
 {
     private GameObject gameObjectAttachedTo;
-	private InputHandlerState currentInputHandler;
-	public InputHandlerState CurrentInputHandler { get { return currentInputHandler; } set { currentInputHandler = value; } }
+	public InputHandlerState CurrentInputHandler { get; set; }
 
-    public InputHandlerUpdater(GameObject gameAttachedTo)
+	public InputHandlerUpdater(GameObject gameAttachedTo)
     {
         this.gameObjectAttachedTo = gameAttachedTo;
     }
 
     public void UpdateComponent()
-    {
+    {		
         CurrentInputHandler.HandleInput();
+
     }
 
     public void FixedUpdateComponent()

@@ -10,8 +10,8 @@ public class UIPanel : MonoBehaviour
 	public List<Selectable> SelectableUIElements { get; private set; } = new List<Selectable>();
 	public List<IFocusUIElement> FocusUIElements { get; private set; } = new List<IFocusUIElement>();
 
-	private void Start()
-	{	
+	private void Awake()
+	{
 		uIPanelHolder = GameObject.Find("MainCanvas").GetComponent<ISubject>();
 		SystemToolMethods.TransformRecursionSearch(gameObject.transform, SelectableUIElements);
 		uIPanelHolder.Subscribe(this);

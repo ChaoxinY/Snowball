@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class UIPanelHolder : MonoBehaviour, ISubject
+public  class UIPanelHolder : MonoBehaviour, ISubject
 {
-	public Transform canvasTransform;
+	public Transform mainCanvasTransform;
 	public List<UIPanel> initializedUIPanels = new List<UIPanel>();
 	public UIPanel StartPanel { get; private set; }
 

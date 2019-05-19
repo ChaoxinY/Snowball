@@ -88,9 +88,9 @@ public class InputSchemeAssigner : IUpdater
 
     public void UpdateComponent()
     {
-		if (InputToolMethod.lastInputString!= null)
-		{ 
-			string inputString = InputToolMethod.ReturnInputString();
+		string inputString = InputToolMethod.ReturnInputString();
+		if (!string.IsNullOrEmpty(inputString))
+		{ 		
 			bool keyBoardInput = inputString.Contains("Submit");
             bool controllerInput = inputString.Contains(InputButton.ButtonStringValues.ButtonA.ToString());
             if (keyBoardInput)
@@ -170,10 +170,10 @@ public class InputSchemeRevoker : IUpdater
     }
 
     public void UpdateComponent()
-    {
-        if (InputToolMethod.ReturnInputString() != null)
-        {
-            string inputString = InputToolMethod.ReturnInputString();
+	{
+		string inputString = InputToolMethod.ReturnInputString();
+		if (!string.IsNullOrEmpty(inputString))
+		{		
             bool KeyBoardControllerCanceled = inputString.Contains("Cancel");
             bool ControllerCanceled = inputString.Contains(InputButton.ButtonStringValues.ButtonB.ToString());
 

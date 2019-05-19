@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class UINavigator : MonoBehaviour
 {
+	public FactoriesProducts.InputstateProducts startInputState;
+
 	private List<IUpdater> updaters = new List<IUpdater>();
 	private EventsystemCurrentGameObjectRefresher objectRefresher;
 
@@ -16,7 +18,9 @@ public class UINavigator : MonoBehaviour
 		InputStateFactory = new InputStateFactory();
 		InputHandlerUpdater = new InputHandlerUpdater(gameObject);
 		InputHandlerUpdater.CurrentInputHandler = (InputHandlerState)InputStateFactory.CreateProduct(
-			(int)FactoriesProducts.InputstateProducts.UINavigatorDefaultState, this, gameObject);
+		(int)startInputState, this, gameObject);
+
+		Debug.Log(InputHandlerUpdater.CurrentInputHandler.InputHandlerUpdater);
 		objectRefresher = new EventsystemCurrentGameObjectRefresher(EventSystem.current);
 		updaters.AddRange(new List<IUpdater>() { InputHandlerUpdater, objectRefresher });
 	}
