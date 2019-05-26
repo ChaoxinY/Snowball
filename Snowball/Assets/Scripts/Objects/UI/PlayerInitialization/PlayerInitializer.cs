@@ -2,30 +2,13 @@
 using System.Collections.Generic;
 
 //Getting player prefabs ready to be played
+//Rename this to initializer navigator.
+//Add function of controller specific navigation
+//To be obsolete
 public class PlayerInitializer : MonoBehaviour
 {
-    //totalPlayers
-    private List<ControllerInformation> connectedControllers = new List<ControllerInformation>() { new ControllerInformation(), new ControllerInformation(), new ControllerInformation(), new ControllerInformation() };
-    private InputSchemeAssigner inputSchemeAssigner;
-    private InputSchemeRevoker inputSchemeRevoker;
-    private InitializePanelAdapter initializePanelAdapter;
-    private List<IUpdater> updaters = new List<IUpdater>();
-
-    private void Start()
-    {
-        initializePanelAdapter = new InitializePanelAdapter(gameObject, connectedControllers);
-        inputSchemeAssigner = new InputSchemeAssigner(initializePanelAdapter, connectedControllers);
-        inputSchemeRevoker = new InputSchemeRevoker(initializePanelAdapter, connectedControllers);
-        updaters.AddRange(new List<IUpdater>() { inputSchemeAssigner, inputSchemeRevoker });
-    }
-
-    private void Update()
-    {
-        SystemToolMethods.UpdateIUpdaters(updaters);
-    }
-
     //put in other class
-    public void GeneratePlayers()
+ /*   public void GeneratePlayers()
     {
         foreach (ControllerInformation c in connectedControllers)
         {
@@ -64,5 +47,6 @@ public class PlayerInitializer : MonoBehaviour
             playerCharacter.GetComponent<IInputSchemeHolder>().InputScheme = inputScheme;
         }
     }
+    */
 }
 

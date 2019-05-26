@@ -47,7 +47,7 @@ public class EventsystemCurrentGameObjectRefresher : IUpdater
 	public void UpdateComponent()
 	{
 		if (eventSystem.currentSelectedGameObject == null)
-		{
+		{	
 			//The stack is empty try to find an activeElement
 			if (lastSelectedGameObjects.Count == 0)
 			{

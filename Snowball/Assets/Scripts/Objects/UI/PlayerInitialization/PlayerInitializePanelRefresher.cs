@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
-public class PlayerInitializePanel : MonoBehaviour
-{ 
-    private bool focused;
+public class PlayerInitializePanelRefresher
+{
+    private bool focused;	
     private List<GameObject> panels = new List<GameObject>();
+    private GameObject gameObject;
     private PanelType currentPanelType;
     private PanelType nextPanelType;
 
     public PanelType NextPanelType
     {
         get
-        {
+        {   
             return nextPanelType;
         }
 
@@ -29,13 +31,13 @@ public class PlayerInitializePanel : MonoBehaviour
         KeyBoardCharacterSelection,
     }
 
-    //preset for different paneltype 
-    private void Start()
+    public PlayerInitializePanelRefresher(GameObject gameObject)
     {
-		for (int i = 0; i < gameObject.transform.childCount; i++)
-		{
-			panels.Add(gameObject.transform.GetChild(i).gameObject);
-		} 
+        this.gameObject = gameObject;
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            panels.Add(gameObject.transform.GetChild(i).gameObject);
+        }
         for (int i = 1; i < panels.Count; i++)
         {
             panels[i].SetActive(false);
@@ -48,10 +50,6 @@ public class PlayerInitializePanel : MonoBehaviour
     {
 		if (NextPanelType == currentPanelType)
 		{
-			//if (!panels[(int)currentPanelType].activeInHierarchy)
-			//{
-			//	panels[(int)currentPanelType].SetActive(true);
-			//}
             return;
         }
         focused = true;
@@ -70,37 +68,36 @@ public class PlayerInitializePanel : MonoBehaviour
     }
 }
 
-public class InitializePanelAdapter
+public class PlayerPanelRefresherAdapter
 {
-    private List<PlayerInitializePanel> playerInitializePanels = new List<PlayerInitializePanel>();
-    private List<ControllerInformation> controllerInformations = new List<ControllerInformation>();
+    private List<PlayerInitializePanelRefresher> playerInitializePanelRefreshers = new List<PlayerInitializePanelRefresher>();
+    public List<ControllerInformation> ControllerInformations { get; set; } = new List<ControllerInformation>();
 
-    public InitializePanelAdapter(GameObject gameObject, List<ControllerInformation> controllerInformations)
+    public PlayerPanelRefresherAdapter(List<PlayerInitializePanel> playerInitializePanels)
     {
-        PlayerInitializePanel[] panels = gameObject.GetComponentsInChildren<PlayerInitializePanel>();
-	
-        for (int i = 0; i < panels.Length; i++)
+        playerInitializePanelRefreshers = playerInitializePanels.Select(panel=>panel.PlayerInitializePanelRefresher).ToList();
+        foreach (var panel in playerInitializePanelRefreshers)
         {
-            playerInitializePanels.Add(panels[i]);
+            Debug.Log(panel);
         }
-		this.controllerInformations = controllerInformations;
+		ControllerInformations = playerInitializePanels.Select(panel => panel.PlayerInformation.playerControllerInformation).ToList();
     }
 
     public void RefreshPanel()
     {
         int i = 0;
-		foreach (PlayerInitializePanel panel in playerInitializePanels)
+		foreach (PlayerInitializePanelRefresher panel in playerInitializePanelRefreshers)
 		{
-			switch (controllerInformations[i].controller)
+			switch (ControllerInformations[i].controller)
 			{
 				case ControllerInformation.ControllerType.None:
-					panel.NextPanelType = PlayerInitializePanel.PanelType.None;
+					panel.NextPanelType = PlayerInitializePanelRefresher.PanelType.None;
 					break;
 				case ControllerInformation.ControllerType.Controller:
-					panel.NextPanelType = PlayerInitializePanel.PanelType.ControllerCharacterSelection;
+					panel.NextPanelType = PlayerInitializePanelRefresher.PanelType.ControllerCharacterSelection;
 					break;
 				case ControllerInformation.ControllerType.Keyboard:
-					panel.NextPanelType = PlayerInitializePanel.PanelType.KeyBoardCharacterSelection;
+					panel.NextPanelType = PlayerInitializePanelRefresher.PanelType.KeyBoardCharacterSelection;
 					break;
 			}
 			i++;

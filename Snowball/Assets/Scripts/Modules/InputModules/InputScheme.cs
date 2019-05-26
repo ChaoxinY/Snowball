@@ -76,14 +76,14 @@ public class InputScheme : ScriptableObject
 public class InputSchemeAssigner : IUpdater
 {
     private List<ControllerInformation> connectedControllers = new List<ControllerInformation>();
-    private InitializePanelAdapter initializePanelAdapter;
+    private PlayerPanelRefresherAdapter initializePanelAdapter;
 
     //Pass the adapter instead the object class to seperate functionality
-    public InputSchemeAssigner(InitializePanelAdapter initializePanelAdapter, List<ControllerInformation> connectedControllers)
+    public InputSchemeAssigner(PlayerPanelRefresherAdapter initializePanelAdapter)
     {
         // currentConnectedControllers = connectedControllers;
         this.initializePanelAdapter = initializePanelAdapter;
-        this.connectedControllers = connectedControllers;
+        this.connectedControllers = initializePanelAdapter.ControllerInformations;
     }
 
     public void UpdateComponent()
@@ -161,12 +161,12 @@ public class InputSchemeAssigner : IUpdater
 public class InputSchemeRevoker : IUpdater
 {
     private List<ControllerInformation> connectedControllers = new List<ControllerInformation>();
-    private InitializePanelAdapter initializePanelAdapter;
+    private PlayerPanelRefresherAdapter initializePanelAdapter;
 
-    public InputSchemeRevoker(InitializePanelAdapter initializePanelAdapter, List<ControllerInformation> connectedControllers)
+    public InputSchemeRevoker(PlayerPanelRefresherAdapter initializePanelAdapter)
     {
         this.initializePanelAdapter = initializePanelAdapter;
-        this.connectedControllers = connectedControllers;
+        connectedControllers = initializePanelAdapter.ControllerInformations;
     }
 
     public void UpdateComponent()

@@ -518,7 +518,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2027873159, guid: d07a2b6d807ec464abbca5b0d4541071, type: 3}
+      propertyPath: players.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3816055124902441101, guid: d07a2b6d807ec464abbca5b0d4541071,
+        type: 3}
+      propertyPath: playerInformation
+      value: 
+      objectReference: {fileID: 11400000, guid: 983b38e68dd7ca64b8b9eb0baace8f48,
+        type: 2}
+    - target: {fileID: 1289763879598342736, guid: d07a2b6d807ec464abbca5b0d4541071,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289763879598342736, guid: d07a2b6d807ec464abbca5b0d4541071,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1980
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289763879598342736, guid: d07a2b6d807ec464abbca5b0d4541071,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2027873159, guid: d07a2b6d807ec464abbca5b0d4541071, type: 3}
+    - {fileID: 351908969, guid: d07a2b6d807ec464abbca5b0d4541071, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d07a2b6d807ec464abbca5b0d4541071, type: 3}
 --- !u!224 &747535074 stripped
 RectTransform:
